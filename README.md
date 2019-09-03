@@ -20,4 +20,6 @@ First serve winning percentage (SSWP): The percentage of points that a server wi
 
 To get feel for how these parameters vary across the ATP, we can plot both serve winning percentage and serve make percentage for all ATP players in our dataset. 
 
+![data_visualizations](serve_make_percentages_hist.png)
+
 
