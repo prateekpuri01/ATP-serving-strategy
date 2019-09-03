@@ -20,6 +20,19 @@ First serve winning percentage (SSWP): The percentage of points that a server wi
 
 To get feel for how these parameters vary across the ATP, we can plot both serve winning percentage and serve make percentage for all ATP players in our dataset. 
 
-![data_visualizations](serve_make_percentages_hist.png)
+![](/data_visualizations/serve_make_percentages_hist.png?raw=true)
+![](/data_visualizations/serve_winning_percentages_hist.png?raw=true)
+
+There are two main trends to observe here. Firstly, first serves are more difficult to make than second serves, as expected, with an average ATP FSP of 59% as compared to a SSP average of 89%. However, the ease of making second serves comes at a price; namely, second serve points are harded to win with an ATP average SSWP of just 48% as compared to an average FSWP of 68%. 
+
+Now there are two serving strategies that are going to be analyzed here
+
+1) Player hits first serve and then second serve if needed 
+2) Player hits first server and then hits another first serve if needed
+
+These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability of winning a servus point we can define the following quantity, known as the 'enhancement metric':
+
+EM = FSP*FSWP-SSP-SSWP
+
 
 
