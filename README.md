@@ -27,12 +27,23 @@ There are two main trends to observe here. Firstly, first serves are more diffic
 
 Now there are two serving strategies that are going to be analyzed here
 
-1) Player hits first serve and then second serve if needed 
-2) Player hits first server and then hits another first serve if needed
+(1) Player hits first serve and then second serve if needed 
+(2) Player hits first server and then hits another first serve if needed
 
-These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability of winning a servus point we can define the following quantity, known as the 'enhancement metric':
+These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability of winning a servus point under the two strategies we can define the following quantity, known as the 'enhancement metric':
 
 EM = FSP*FSWP-SSP-SSWP
+
+Conceptually, we are saying that the probability of winning a second serve is: 
+(chances of making the serve) x (probability of winning point if serve is in)
+
+For strategy (1), this quantity is FSP*FSWP, whereas for strategy (2), this quantity is SSP*SSWP, and the EM factor simply is the difference in these quantities. 
+
+The following plot is a histogram of the EM factor for ATP players, averaged all matches that they have played that are recorded in the ATP database
+
+![](/data_visualizations/ATP_EM.png?raw=true)
+
+
 
 
 
