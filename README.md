@@ -46,14 +46,14 @@ Strategy (1) is fairly conventional and has been adopted by nearly all ATP playe
 
 These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a servus point under the two strategies we can define the following quantity, known as the 'enhancement metric':
 
-EM = FSP*FSWP-SSP-SSWP
+EM = FSP x FSWP-SSP x SSWP
 
 Conceptually, we are saying that the probability of winning a second serve is: 
 (chances of making the serve) x (probability of winning point if serve is in)
 
-For strategy (1), this quantity is FSP*FSWP, whereas for strategy (2), this quantity is SSP*SSWP, and the EM factor simply is the difference in these quantities. 
+For strategy (1), this quantity is FSP x FSWP, whereas for strategy (2), this quantity is SSP x SSWP, and the EM factor simply is the difference in these quantities. Thus the EM factor is equivalent to the increase in probability of winning a servus point obtained from switching from strategy (1) to strategy (2) (Delta P). 
 
-An EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
+Therefore, an EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
 
 # Analyzing the EM factor
 
@@ -142,11 +142,19 @@ This may not always be the case. For example, if a player is facing a match poin
 
 If pursuing a strategy (2) approach, hitting increased amounts of first serves may cause players to tire and thus to reduce their serving percentages. It's unclear if this effect is significant. Further, if electing to pursue a strategy (2) approach, the average point and game length will likely be shorter than when pursuing a strategy (1) approach since first serve points tend to be shorter than second serve points. Perhaps these two effects cancel out and perhaps they do not, but further analysis should be conducted in this realm.
 
-*Rooms for improvments*
+3) **All previous data was obtained from players employing strategy (1)**
+
+I'm assuming that the FSP, FSWP, SSP, and SSWP for each player that were used in the modeling were done by players using strategy (1) serving tactics. If players were using occasionally using strategy (2) tactics, than their second serves and first serves would be equivalent for particular matches, and therefore the SSP and SSWP percentages would be muddled with the FSP and FSWP percentages, rendering the modeling inaccurate. While certain players, such as Nick Krygrios, appear to utilize strategy (2) tactics occassionaly, these situations are rare. 
+
+Further in the future, data that tracks the mph of each serve may be used to distinguish between 'first' and 'second' serves rather than relying solely on the order in which a serve was hit. 
+
+*Rooms for improvment*
 
 The Monte Carlo simulation proved to be an adequate tool for modeling player winning percentage; however, there was still a nontrivial amount of error associated with this mapping. In the future the Monte Carlo method may be replaced by a machine learning algorithm that may be able to more accurately predict player winning percentages and therefore be employed to more accurately asses the impact of serving strategy on player performance. 
 
 Similarly, data split based off of surface type of length of match (best of 3 sets vs. best of 5 sets) may also be incorporate to more accurately predict player performance when using different strategies. 
+
+Lastly, there are two options for each player in this study: hit a first serve or hit a second serve. In reality, there is a continuum in between these poles, and for certain players, it may very well be that hitting a serve that is halfway in between these two extremes may actually be the optimal strategy. In order to explore these alternative strategies, data on serve effectiveness vs. serve speed, as well as serve placement, would be very useful. 
 
 
 
