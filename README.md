@@ -82,7 +82,7 @@ Even though Ivanisevic's career EM is quite high (.028), we see that his EM fact
 
 Certain opponents simply return first/second serves better than other opponents, and these effects will guide which strategy is optimal when playing them. Therefore, we can reconstruct the above tables while restricting ourselves to a player's serving statistics against a particular player. Here, we will restrict ourselves to players who have played each other a minimum of **10 times** so that we may have a resonable amount of data to sample.
 
-In these tables, the first name refers to the player who is serving and the second name refers the player whom he is serving against
+In these tables, the first name refers to the player who is serving and the second name refers the player whom they are serving against
 
 ![](/data_visualizations/top_EM_matchups.png?raw=true)
 
@@ -139,7 +139,7 @@ The following assumptions are inherent to the modeling in this project
 
 1) **Players serves percentages are static**
 
-This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so at critical junctures. Under Strategy (2), my modeling assumes that a player is able to serve with the same percentages in both situations. However, if a player is facing a match point, will he be able to hit first serves at the same percentage he has been all match? Further analysis is needed to address this concern fully. 
+This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so at critical junctures. Under Strategy (2), my modeling assumes that a player is able to serve with the same percentages in both situations. However, if a player is facing a match point, will they be able to hit first serves at the same percentage they have been all match? Further analysis is needed to address this concern fully. 
 
 However, if such an effect does in fact prove to be significant, perhaps mental training or coaching could dampen the effect if a Strategy (2) approach is desired.
 
@@ -159,7 +159,7 @@ The Monte Carlo simulation proved to be an adequate tool for modeling player win
 
 Similarly, data splits based off of surface type and length of match (best of 3 sets vs. best of 5 sets) may also be incorporated into the modeling to more accurately predict player performance when using different strategies. 
 
-Lastly, there are two options for each player in this study when hitting a second serve: hit his first serve again or hit his normal second serve. In reality, there is a continuum in between these poles, and for certain players, it may very well be that hitting a serve that is halfway in between these two extremes may actually be the optimal strategy. In order to explore these alternative strategies, data on serve effectiveness vs. serve speed, as well as serve placement, would be very useful. 
+Lastly, there are two options for each player in this study when hitting a second serve: hit their first serve again or hit their normal second serve. In reality, there is a continuum in between these poles, and for certain players, it may very well be that hitting a serve that is halfway in between these two extremes in speed may actually be the optimal strategy. In order to explore these alternative strategies, data on serve effectiveness vs. serve speed, as well as serve placement, would be very useful. 
 
 
 
