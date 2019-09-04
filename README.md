@@ -148,7 +148,7 @@ I'm assuming that the FSP, FSWP, SSP, and SSWP for each player that were used in
 
 Further in the future, data that tracks the mph of each serve may be used to distinguish between 'first' and 'second' serves rather than relying solely on the order in which a serve was hit. 
 
-*Rooms for improvment*
+*Room for improvment*
 
 The Monte Carlo simulation proved to be an adequate tool for modeling player winning percentage; however, there was still a nontrivial amount of error associated with this mapping. In the future the Monte Carlo method may be replaced by a machine learning algorithm that may be able to more accurately predict player winning percentages and therefore be employed to more accurately asses the impact of serving strategy on player performance. 
 
