@@ -66,6 +66,65 @@ We can also restrict this table to active players
 
 ![](/data_visualizations/active_player_top_career_EM.png?raw=true)
 
+As we can see, there are certain players who could expect to win over 5% more servus points, on average, by switching from strategy (1) to strategy (2). The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in length baseline exchanges, which can frequently occur during second serves since the return is put in play at a high rate. The second factor serves to decrease their SSWP and further make strategy (2) more favorable. 
+
+Now these tables averaged serving statistics across all recorded career matches. However, in reality, a player's FSWP and SSWP will depend on who they are playing. Certain players return first serves well and certain players do not. Therefore, we can reconstruct these tables while restricting ourselves to a player's serving statistics against a particular player. Here, we will restrict ourselves to players who have played each other a minimum of 10 times so that we may have a resonable amount of data to sample. In these tables, the first name refers to the player who is serving and the second serve refers the player whom he is serving against
+
+![](/data_visualizations/top_EM_matchups.png?raw=true)
+
+Once again we can also restrict ourself to active player matchups
+
+![](/data_visualizations/active_player_top_EM_matchups.png?raw=true)
+
+These tables, for the most part, are filled with players with powerful first serves who are playing opponents known for strong baseline games. Against these crafty baseline players, the servers do not have a high chance of winning their second serve points; therefore, they can benefit by hitting their more powerful serves more often, even at the expense of additional double faults. 
+
+We can take Pete Sampras vs Andre Agassi as a case study. According to my results, Sampras coud have won roughly 6.1% more servus points by switching to strategy (2) from strategy (1). Why? Sampras is known for having an incredible serve; however, Agassi is also regarded as one of the best serve returners of all time. However, when these two forces collide on second serve points, Agassi has the advantage. His strong return game gave him a 54% chance of winning the point, however this dropped to just 20% when Sampras made his first serve. The EM factor results suggest that Sampras can nullify Agassi's strong return by putting his first serve in play more often. 
+
+Should players with career EM Factors>0 always employ serving strategy (2)? Perhaps not. Looking at 
+
+# Modeling how strategy switches can modify match outcomes
+
+The above analysis informs us that certain players may win more servus points by switching from strategy (1) to strategy (2). But how is this going to affect how often they win the match? After all, whether they win or not is the most important statistic of them all. One way to approach this problem is to perform roughly 1000 Monte Carlo simulations of matches between two players, taking into account their serve statistics against one another. By determining each player's FSWP and SSWP percentages against their opponent, points can be simulated, which allows games, sets, and eventually matches to be simulated as well. 
+
+First question: How trust worthy are Monte Carlo (MC) simulations at predicting match outcomes. To assess this question, I performed my MC analysis on all head-t-head player matchups with a match history of at least five matches. I then compared by MC results to each players win-loss record against his opponent. In this initial Monte Carlo simulation, I assumed each player obeyed strategy (1), as an overwhelmingly the case with ATP players.
+
+Here are the results, along with confidence and prediction bands to a linear fit to the data
+
+![](/data_visualizations/monte_carlo_calibration.png?raw=true)
+
+The Monte Carlo simulation appears to be a reasonable predictor of head-to-head winning percentage. The noise in the fit can be attributed to a couple different reasons. 
+
+1) Player matchups depend on surface type. In tennis, there are three main surfaces: clay, grass, and hard court. If two players have played a majority of their matches on clay, their head-to-head serving statistics will be dominated by their clay court encounters. However, these percentages may not apply well to a matchup on grass, for example. My MC simulation does not explicity account for surface type. It indirectly accounts for it by weighting the surface that has played on the most often in the head-to-head serving statistics; however, an updated model that directly accounts for surface type would be an improvement. 
+
+2) Winning percentages changes throughout matches. My MC simulation assumes a player's chances of winning a servus point is static throughout a match, but in reality, these percentages may change more for some players than others due to physical fatigue, mental toughness, etc. 
+
+3) Low statistics. It is quite rare for players to have more than 10 matches against one another. Therefore, it is not entirely unlikely that an actual player's winning percentage against a certain player has yet regressed to the mean it would approach if they had played roughly a 1000 times, as is the case with the MC simulations. 
+
+# Final results
+
+I can now repeat my Monte Carlo simulations when using two serving strategies: strategy (1) and strategy (2). After performing the simulations, ising the linear fit function that I calculated in the previous section that calibrated MC results to real-life winning percentage, I can then translate the Monte Carlo results to expected real life win percentages. 
+
+The following table displays the largest increase in winning percentages expected from switching from strategy (1) to strategy (2) for both post-1991 (first table) and active (second table) player matchups. The error bars represent 68% confidence interval bands based on errors to the fit function in the previous section.
+
+![](/data_visualizations/best_win_enhancement.png?raw=true)
+![](/data_visualizations/active_players_win_enhancement.png?raw=true)
+
+As can be seen from the tables, there are some players who could increase their expected win percentage by more than 10% by switching serving strategies.
+
+As expected, many matchup from the EM Factor table reappear with a few notable exceptions. For example, while Novak Djokovic was expected to win roughly 5% more servus points from switching strategies against Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils was also expected to win roughly 5% more servus points by switching strategies. However, he is just 10-7 against Gasquet, so that servus point win percentage increase was enough to catapault his expected match winning percentage by rougly 10%. 
+
+# Conclusion
+
+Tennis, in general, is a game of slim margins. Especially when playing an opponent who you are evenly matched against, small increases in point winning percentage may be able to push you over the edge and allow you to win matchups at non-trivially higher percentages. The analysis conducted here suggests that for certain players whose first serve is quite strong and whose second serve may be a vulnerability against certain opponents, changing serving tactics may in fact provide a slight edge in serve winning percentage and, by extension, overall match winning percentage as well. 
+
+# Caveats and suggestions for improvement
+
+
+
+
+
+
+
 
 
 
