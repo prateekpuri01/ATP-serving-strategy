@@ -1,4 +1,20 @@
 These are all the python files that were used to store the data into a SQL database, calculate the relevant player serving statistics, and then subsequently
 analyze and visualize the results
 
-header comments are placed at the top of each file that describes the files function
+header comments are placed at the top of each file that describes the file's function but here is brief description of each
+
+SQL_DataBase_Loader.py - takes match statistics data file from the Sackmann repository and loads them into an sql database
+https://github.com/JeffSackmann/tennis_atp
+
+SQL_to_Pandas_DF.py - imports sql database and converts into a pandas dataframe. Relevant serving statistics for player head-to-head matchups 
+are calculated and stored in another dataframe. Other datafile describing player serving statistics are produced as well
+
+data_visualization.py - histrogram and bar charts are produced that describe player EM metrics, head to head EM metrics, as well as overall ATP
+serving statistics
+
+Monte_Carlo_Sim.py - Monte Carlo simulation that simulates matches between two players under strategy (1) and strategy (2) and store results into a dataframe
+
+MC_results_plot.py - The results from the MC simulation are compared to real life head-to-head matchup win percentages
+This calibration is used to predict the difference in winning percentages a player could expect by switching serving strategies in a given matchup
+
+get_active_players_ATP.py - helper file that produces a file containing a list of active ATP players (defined as having at least one match played since 2017) 
