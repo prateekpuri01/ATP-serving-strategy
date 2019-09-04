@@ -136,7 +136,9 @@ The following assumptions are inherent to the modeling in this project
 
 1) **Players serves percentages are static**
 
-This may not always be the case. For example, if a player is facing a match point, will he be able to hit first serves at the same percentage he has been all match? Further analysis is needed to address this concern fully. If such an effect proves to be significant, perhaps mental training or coaching could dampen the effect if a strategy (2) approach is desired.
+This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so when down three match points. My modeling assumes that a player is able to perform the same under strategy (2) in both situations. But if a player is facing a match point, will he be able to hit first serves at the same percentage he has been all match? Further analysis is needed to address this concern fully. 
+
+However, if such an effect does in fact prove to be significant, perhaps mental training or coaching could dampen the effect if a strategy (2) approach is desired.
 
 2) **Fatigue is not an issue**
 
