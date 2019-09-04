@@ -42,16 +42,16 @@ Now there are two serving strategies that are going to be analyzed here
 (1) Player hit a first serve and then second serve if needed 
 (2) Player hit a first serve and then hits another first serve if needed
 
-Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, has more of a 'high risk/high reward' element. By hitting two first serves, the player has a higher chance of winning a servus point if one of his/her serves goes in, but he/she also has a higher risk of double faulting. However, depending on how weak the player's second serve is, this additional risk may still be advantageous. 
+Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, has more of a 'high risk/high reward' element. By hitting two first serves, the player has a higher chance of winning a service point if one of his/her serves goes in, but he/she also has a higher risk of double faulting. However, depending on how weak the player's second serve is, this additional risk may still be advantageous. 
 
-These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a servus point under the two strategies we can define the following quantity, known as the 'enhancement metric':
+These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a service point under the two strategies we can define the following quantity, known as the 'enhancement metric':
 
 EM = FSP x FSWP-SSP x SSWP
 
 Conceptually, we are saying that the probability of winning a second serve is: 
 (chances of making the serve) x (probability of winning point if serve is in)
 
-For strategy (1), this quantity is FSP x FSWP, whereas for strategy (2), this quantity is SSP x SSWP, and the EM factor simply is the difference in these quantities. Thus the EM factor is equivalent to the increase in probability of winning a servus point obtained from switching from strategy (1) to strategy (2) (Delta P). 
+For strategy (1), this quantity is FSP x FSWP, whereas for strategy (2), this quantity is SSP x SSWP, and the EM factor simply is the difference in these quantities. Thus the EM factor is equivalent to the increase in probability of winning a service point obtained from switching from strategy (1) to strategy (2) (Delta P). 
 
 Therefore, an EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
 
@@ -69,7 +69,7 @@ We can also restrict this table to active players
 
 ![](/data_visualizations/active_players_top_career_EM.png?raw=true)
 
-As we can see, there are certain players who could expect to win over 5% more servus points, on average, by switching from strategy (1) to strategy (2). The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in length baseline exchanges, which can frequently occur during second serves since the return is put in play at a high rate. The second factor serves to decrease their SSWP and further make strategy (2) more favorable. 
+As we can see, there are certain players who could expect to win over 5% more service points, on average, by switching from strategy (1) to strategy (2). The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in length baseline exchanges, which can frequently occur during second serves since the return is put in play at a high rate. The second factor serves to decrease their SSWP and further make strategy (2) more favorable. 
 
 Now these tables averaged serving statistics across all recorded career matches. However, in reality, a player's FSWP and SSWP will depend on who they are playing. Is it always advantageous for a player with career EM Factors>0 to employ serving strategy (2)? Perhaps not. As a case study, look at Goran Ivanisevic's EM versus all opponents he's played at least **5 matches** with. 
 
@@ -89,11 +89,11 @@ Once again we can also restrict ourself to active player matchups
 
 These tables, for the most part, are filled with players with powerful first serves who are playing opponents known for strong baseline games. Against these crafty baseline players, the servers do not have a high chance of winning their second serve points; therefore, they can benefit by hitting their more powerful serves more often, even at the expense of additional double faults. 
 
-We can take Pete Sampras vs Andre Agassi as a case study. According to my results, Sampras coud have won roughly 6.1% more servus points by switching to strategy (2) from strategy (1). Why? Sampras is known for having an incredible serve; however, Agassi is also regarded as one of the best serve returners of all time. However, when these two forces collide on second serve points, Agassi has the advantage. His strong return game gave him a 54% chance of winning the point, however this dropped to just 20% when Sampras made his first serve. The EM factor results suggest that Sampras can nullify Agassi's strong return by putting his first serve in play more often.  i
+We can take Pete Sampras vs Andre Agassi as a case study. According to my results, Sampras coud have won roughly 6.1% more service points by switching to strategy (2) from strategy (1). Why? Sampras is known for having an incredible serve; however, Agassi is also regarded as one of the best serve returners of all time. However, when these two forces collide on second serve points, Agassi has the advantage. His strong return game gave him a 54% chance of winning the point, however this dropped to just 20% when Sampras made his first serve. The EM factor results suggest that Sampras can nullify Agassi's strong return by putting his first serve in play more often.  i
 
 # Modeling how strategy switches can modify match outcomes
 
-The above analysis informs us that certain players may win more servus points by switching from strategy (1) to strategy (2). But how is this going to affect how often they win the match? After all, whether they win or not is the most important statistic of them all. One way to approach this problem is to perform roughly 1000 Monte Carlo simulations of matches between two players, taking into account their serve statistics against one another. By determining each player's FSWP and SSWP percentages against their opponent, points can be simulated, which allows games, sets, and eventually matches to be simulated as well. 
+The above analysis informs us that certain players may win more service points by switching from strategy (1) to strategy (2). But how is this going to affect how often they win the match? After all, whether they win or not is the most important statistic of them all. One way to approach this problem is to perform roughly 1000 Monte Carlo simulations of matches between two players, taking into account their serve statistics against one another. By determining each player's FSWP and SSWP percentages against their opponent, points can be simulated, which allows games, sets, and eventually matches to be simulated as well. 
 
 First question: How trust worthy are Monte Carlo (MC) simulations at predicting match outcomes. To assess this question, I performed my MC analysis on all head-t-head player matchups with a match history of at least five matches. I then compared by MC results to each players win-loss record against his opponent. In this initial Monte Carlo simulation, I assumed each player obeyed strategy (1), as an overwhelmingly the case with ATP players.
 
@@ -105,7 +105,7 @@ The Monte Carlo simulation appears to be a reasonable predictor of head-to-head 
 
 1) Player matchups depend on surface type. In tennis, there are three main surfaces: clay, grass, and hard court. If two players have played a majority of their matches on clay, their head-to-head serving statistics will be dominated by their clay court encounters. However, these percentages may not apply well to a matchup on grass, for example. My MC simulation does not explicity account for surface type. It indirectly accounts for it by weighting the surface that has played on the most often in the head-to-head serving statistics; however, an updated model that directly accounts for surface type would be an improvement. 
 
-2) Winning percentages changes throughout matches. My MC simulation assumes a player's chances of winning a servus point is static throughout a match, but in reality, these percentages may change more for some players than others due to physical fatigue, mental toughness, etc. 
+2) Winning percentages changes throughout matches. My MC simulation assumes a player's chances of winning a service point is static throughout a match, but in reality, these percentages may change more for some players than others due to physical fatigue, mental toughness, etc. 
 
 3) Low statistics. It is quite rare for players to have more than 10 matches against one another. Therefore, it is not entirely unlikely that an actual player's winning percentage against a certain player has not yet regressed to the mean it would approach if they had played roughly a 1000 times, as is the case with the MC simulations. 
 
@@ -120,7 +120,7 @@ The following table displays the largest increase in winning percentages expecte
 
 As can be seen from the tables, there are some players who could increase their expected win percentage by more than 10% by switching serving strategies.
 
-As expected, many matchup from the EM Factor table reappear with a few notable exceptions. For example, while Novak Djokovic was expected to win roughly 5% more servus points from switching strategies against Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils was also expected to win roughly 5% more servus points by switching strategies. However, he is just 10-7 against Gasquet, so that servus point win percentage increase was enough to catapault his expected match winning percentage by rougly 10%. 
+As expected, many matchup from the EM Factor table reappear with a few notable exceptions. For example, while Novak Djokovic was expected to win roughly 5% more service points from switching strategies against Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils was also expected to win roughly 5% more service points by switching strategies. However, he is just 10-7 against Gasquet, so that service point win percentage increase was enough to catapault his expected match winning percentage by rougly 10%. 
 
 # Conclusion
 
