@@ -98,7 +98,7 @@ We can take Pete Sampras vs Andre Agassi as a case study. According to my result
 
 The above analysis informs us that certain players may win more service points by switching from strategy (1) to strategy (2). But how is this going to affect how often they win the match? After all, whether they win or not is the most important statistic of them all. One way to approach this problem is to perform Monte Carlo simulations of matches between two players, taking into account their serving statistics against one another. By determining each player's FSWP and SSWP percentages against their opponent, service points can be simulated for each player, which allows games, sets, and eventually matches to be simulated as well. Further, we can perform the simulations assuming a player uses Strategy (1) during the match and then reperform the simulations assuming the player follows Strategy (2), and finally, we can compare the differences. 
 
-First question: How trustworthy are Monte Carlo (MC) simulations at predicting match outcomes? To assess this question, I performed my MC analysis on all head-to-head player matchups with a match history of **at least 10 matches** (1000 simulations per matchup). I then compared by MC results to each real life head-to-head win-loss record. In this initial Monte Carlo simulation, I assumed each player obeyed Strategy (1), as is overwhelmingly the case with ATP players.
+First question: How trustworthy are Monte Carlo (MC) simulations at predicting match outcomes? To assess this question, I performed my MC analysis on all head-to-head player matchups with a match history of **at least 10 matches** (1000 simulations per matchup, best-of-5 set matches). I then compared by MC results to each real life head-to-head win-loss record. In this initial Monte Carlo simulation, I assumed each player obeyed Strategy (1), as is overwhelmingly the case with ATP players.
 
 Here are the results, along with confidence and prediction bands to a linear fit to the data
 
@@ -123,43 +123,43 @@ The following table displays the largest increase in winning percentages expecte
 
 As can be seen from the tables, there are some players who could increase their expected win percentage by more than 10% by switching serving strategies.
 
-As expected, many matchups from the EM Factor table reappear in the MC tables, with a few notable exceptions. For example, while Novak Djokovic was expected to win roughly 5% more service points from switching strategies against Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils was also expected to win roughly 5% more service points by switching strategies. However, he is just 10-7 against Gasquet, so that service point win percentage increase was enough to catapault his expected match winning percentage by rougly 10%. 
+As expected, many matchups from the EM Factor table reappear in the MC tables, with a few notable exceptions. For example, while Novak Djokovic has a matchup EM of +5% when playing Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils also had a +5% matchup EM. However, he is just 10-7 against Gasquet, so his service point win percentage enhancement had a much larger influence on expected match outcomes. 
 
 # Conclusion
 
 Tennis, in general, is a game of slim margins. Especially when playing an opponent who you are evenly matched against, small increases in point winning percentage may be able to push you over the edge and allow you to win matchups at non-trivially higher percentages. The analysis conducted here suggests that for certain players whose first serve is quite strong and whose second serve may be a vulnerability against certain opponents, changing serving tactics may in fact provide a slight edge in serve winning percentage and overall match winning percentage as well. 
 
-In general, whether a strategy (1) or a strategy (2) approach is more successful depends both on the player and who he is facing. However, if certain cases, players may be able to improve their winning percentage against a particular opponents by over 10% by switching to an all-first-serve strategy.
+In general, whether a strategy (1) or a strategy (2) approach is more successful depends both on the player and their opponent. However, in certain matchups, players may be able to improve their winning percentage against particular opponents by over 10% by switching to an all-first-serve strategy.
 
 # Caveats and suggestions for improvement
 
 The following assumptions are inherent to the modeling in this project
 
-*Caveats*
+*Assumptions*
 
 1) **Players serves percentages are static**
 
-This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so when down three match points. My modeling assumes that a player is able to perform the same under strategy (2) in both situations. But if a player is facing a match point, will he be able to hit first serves at the same percentage he has been all match? Further analysis is needed to address this concern fully. 
+This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so at critical junctures. Under Strategy (2), my modeling assumes that a player is able to serve with the same percentages in both situations. However, if a player is facing a match point, will he be able to hit first serves at the same percentage he has been all match? Further analysis is needed to address this concern fully. 
 
-However, if such an effect does in fact prove to be significant, perhaps mental training or coaching could dampen the effect if a strategy (2) approach is desired.
+However, if such an effect does in fact prove to be significant, perhaps mental training or coaching could dampen the effect if a Strategy (2) approach is desired.
 
 2) **Fatigue is not an issue**
 
-If pursuing a strategy (2) approach, hitting increased amounts of first serves may cause players to tire and thus to reduce their serving percentages. It's unclear if this effect is significant. Further, if electing to pursue a strategy (2) approach, the average point and game length will likely be shorter than when pursuing a strategy (1) approach since first serve points tend to be shorter than second serve points. Perhaps these two effects cancel out and perhaps they do not, but further analysis should be conducted in this realm.
+If pursuing a Strategy (2) approach, hitting increased amounts of first serves may cause players to tire and thus to reduce their serving percentages over the course of a match. It's unclear if this effect is significant. On the other hand, if electing to pursue Strategy (2), the average point and game length will likely be shorter than when pursuing Strategy (1) since first serve points tend to be shorter than second serve points. Perhaps these two effects cancel out and perhaps they do not, but further analysis should be conducted to address this. 
 
 3) **All previous data was obtained from players employing strategy (1)**
 
-I'm assuming that the FSP, FSWP, SSP, and SSWP for each player that were used in the modeling were done by players using strategy (1) serving tactics. If players were using occasionally using strategy (2) tactics, than their second serves and first serves would be equivalent for particular matches, and therefore the SSP and SSWP percentages would be muddled with the FSP and FSWP percentages, rendering the modeling inaccurate. While certain players, such as Nick Krygrios, appear to utilize strategy (2) tactics occassionaly, these situations are rare. 
+I'm assuming that the FSP, FSWP, SSP, and SSWP metrics for each player that were used in the modeling were done by players using Strategy (1) serving tactics. If players were using occasionally using Strategy (2) tactics, than they would sometimes be hitting first serves as second serves, but this change would not be recorded as such in the match statistics. Therefore a player's SSP and SSWP percentages for those matches would be muddled with their FSP and FSWP percentages, rendering the modeling inaccurate. However, while certain players, such as Nick Krygrios, appear to utilize Strategy (2) tactics occassionaly, these situations are rare; thus I do not expect this effect to be significant.
 
-Further in the future, data that tracks the mph of each serve may be used to distinguish between 'first' and 'second' serves rather than relying solely on the order in which a serve was hit. 
+Further in the future, data that tracks the mph of each serve may be used to distinguish between 'first' and 'second' serves more accurately rather than relying solely on the order in which a serve was hit. 
 
 *Room for improvment*
 
 The Monte Carlo simulation proved to be an adequate tool for modeling player winning percentage; however, there was still a nontrivial amount of error associated with this mapping. In the future the Monte Carlo method may be replaced by a machine learning algorithm that may be able to more accurately predict player winning percentages and therefore be employed to more accurately asses the impact of serving strategy on player performance. 
 
-Similarly, data split based off of surface type of length of match (best of 3 sets vs. best of 5 sets) may also be incorporate to more accurately predict player performance when using different strategies. 
+Similarly, data splits based off of surface type and length of match (best of 3 sets vs. best of 5 sets) may also be incorporated into the modeling to more accurately predict player performance when using different strategies. 
 
-Lastly, there are two options for each player in this study: hit a first serve or hit a second serve. In reality, there is a continuum in between these poles, and for certain players, it may very well be that hitting a serve that is halfway in between these two extremes may actually be the optimal strategy. In order to explore these alternative strategies, data on serve effectiveness vs. serve speed, as well as serve placement, would be very useful. 
+Lastly, there are two options for each player in this study when hitting a second serve: hit his first serve again or hit his normal second serve. In reality, there is a continuum in between these poles, and for certain players, it may very well be that hitting a serve that is halfway in between these two extremes may actually be the optimal strategy. In order to explore these alternative strategies, data on serve effectiveness vs. serve speed, as well as serve placement, would be very useful. 
 
 
 
