@@ -56,15 +56,17 @@ An EM factor>0 may imply that strategy (2) would be advantagous over strategy (1
 
 The following plot is a histogram of the EM factor for ATP players, averaged all matches that they have played that are recorded in the ATP database
 
-![](/data_visualizations/career_top_EM.png?raw=true)
+![](/data_visualizations/ATP_EM.png?raw=true)
 
 As can been seen, the average EM factor is < 0, implying that strategy (1) may be optimal for most players; however, there seems to several players with EM factors>0. We can list the players with the highest EM factors averaged over their career
 
-![](/data_visualizations/ATP_EM.png?raw=true)
+![](/data_visualizations/career_top_EM.png?raw=true)
 
 We can also restrict this table to active players
 
 ![](/data_visualizations/active_player_top_career_EM.png?raw=true)
+
+
 
 
 
