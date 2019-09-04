@@ -116,7 +116,7 @@ I can now repeat my Monte Carlo simulations when using two serving strategies: s
 The following table displays the largest increase in winning percentages expected from switching from strategy (1) to strategy (2) for both post-1991 (first table) and active (second table) player matchups. The error bars represent 68% confidence interval bands based on errors to the fit function in the previous section.
 
 ![](/data_visualizations/best_win_enhancement.png?raw=true)
-![](/data_visualizations/active_players_win_enhancement.png?raw=true)
+![](/data_visualizations/active_players_best_win_enhancement.png?raw=true)
 
 As can be seen from the tables, there are some players who could increase their expected win percentage by more than 10% by switching serving strategies.
 
