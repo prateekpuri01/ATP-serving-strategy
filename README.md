@@ -27,7 +27,7 @@ There are two main trends to observe here. Firstly, first serves are more diffic
 
 Moreover, how a player peforms on his/her second serve is rather uncorrelated to how the player performs on his/her first serve, as demonstrated by the following graphs that plots FSWP vs. SSWP
 
-![](/data_visualizations/first_serve_second_serve_correaltion.png?raw=true)
+![](/data_visualizations/first_serve_second_serve_wp_correaltion.png?raw=true)
 
 The lack of strong correlation, demonstrated by the R^2 coefficient of 0.2, suggests that it may be difficult to globally apply an optimal serving strategy to all ATP players. Rather, serving strategies may need to be adjusted to each individual player to account for their first/second serve strengths and weaknesses. 
 
@@ -67,13 +67,13 @@ As can been seen, the average EM factor is < 0, implying that strategy (1) may b
 
 We can also restrict this table to active players
 
-![](/data_visualizations/active_player_top_career_EM.png?raw=true)
+![](/data_visualizations/active_players_top_career_EM.png?raw=true)
 
 As we can see, there are certain players who could expect to win over 5% more servus points, on average, by switching from strategy (1) to strategy (2). The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in length baseline exchanges, which can frequently occur during second serves since the return is put in play at a high rate. The second factor serves to decrease their SSWP and further make strategy (2) more favorable. 
 
 Now these tables averaged serving statistics across all recorded career matches. However, in reality, a player's FSWP and SSWP will depend on who they are playing. Is it always advantageous for a player with career EM Factors>0 to employ serving strategy (2)? Perhaps not. As a case study, look at Goran Ivanisevic's EM versus all opponents he's played at least **5 matches** with. 
 
-![](/data_visualizations/Goran_Table.png?raw=true)
+![](/data_visualizations/Goran_Ivanisevic_matchup_EM.png?raw=true)
 
 Even though Ivanisevic's career EM is quite high (.028), we see that his EM factor against certain opponent varies quite a bit. Even though on average, he would appear to benefit from strategy (2), against certain opponents strategy (1) is preferable. 
 
@@ -85,7 +85,7 @@ In these tables, the first name refers to the player who is serving and the seco
 
 Once again we can also restrict ourself to active player matchups
 
-![](/data_visualizations/active_player_top_EM_matchups.png?raw=true)
+![](/data_visualizations/active_players_top_EM_matchups.png?raw=true)
 
 These tables, for the most part, are filled with players with powerful first serves who are playing opponents known for strong baseline games. Against these crafty baseline players, the servers do not have a high chance of winning their second serve points; therefore, they can benefit by hitting their more powerful serves more often, even at the expense of additional double faults. 
 
