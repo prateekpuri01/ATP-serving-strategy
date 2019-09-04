@@ -50,12 +50,22 @@ Conceptually, we are saying that the probability of winning a second serve is:
 
 For strategy (1), this quantity is FSP*FSWP, whereas for strategy (2), this quantity is SSP*SSWP, and the EM factor simply is the difference in these quantities. 
 
+An EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
 
 # Analyzing the EM factor
 
 The following plot is a histogram of the EM factor for ATP players, averaged all matches that they have played that are recorded in the ATP database
 
+![](/data_visualizations/career_top_EM.png?raw=true)
+
+As can been seen, the average EM factor is < 0, implying that strategy (1) may be optimal for most players; however, there seems to several players with EM factors>0. We can list the players with the highest EM factors averaged over their career
+
 ![](/data_visualizations/ATP_EM.png?raw=true)
+
+We can also restrict this table to active players
+
+![](/data_visualizations/active_player_top_career_EM.png?raw=true)
+
 
 
 
