@@ -107,7 +107,7 @@ The Monte Carlo simulation appears to be a reasonable predictor of head-to-head 
 
 2) Winning percentages changes throughout matches. My MC simulation assumes a player's chances of winning a servus point is static throughout a match, but in reality, these percentages may change more for some players than others due to physical fatigue, mental toughness, etc. 
 
-3) Low statistics. It is quite rare for players to have more than 10 matches against one another. Therefore, it is not entirely unlikely that an actual player's winning percentage against a certain player has yet regressed to the mean it would approach if they had played roughly a 1000 times, as is the case with the MC simulations. 
+3) Low statistics. It is quite rare for players to have more than 10 matches against one another. Therefore, it is not entirely unlikely that an actual player's winning percentage against a certain player has not yet regressed to the mean it would approach if they had played roughly a 1000 times, as is the case with the MC simulations. 
 
 # Final results
 
