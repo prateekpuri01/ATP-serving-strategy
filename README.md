@@ -16,8 +16,8 @@ To frame this problem, let us first define a few parameters for each player:
 
 **First serve percentage (FSP)**: The percentage of times a server makes his/her first serve <br/>
 **First serve winning percentage (FSWP)**: The percentage of points that a server wins if his/her first serve lands in <br/>
-**First serve percentage (SSP)**: The percentage of times that a server makes his/her second serve <br/>
-**First serve winning percentage (SSWP)**: The percentage of points that a server wins if his/her second serve lands in <br/>
+**Second serve percentage (SSP)**: The percentage of times that a server makes his/her second serve <br/>
+**Second serve winning percentage (SSWP)**: The percentage of points that a server wins if his/her second serve lands in <br/>
 
 To get feel for how these parameters vary across the ATP, we can plot both serve winning percentage (FSWP,SSWP) and serve make percentage (FSP,SSP) for all ATP players in our dataset. 
 
