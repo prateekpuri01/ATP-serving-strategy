@@ -7,7 +7,7 @@ All data that this project was based on was retrieved from Jeff Sackmann's wonde
 
 The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer than 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. 
 
-This data exclusively contain information on ATP matches (not WTA matches), and thus any conclusions drawn will be most relevant to ATP players. 
+This dataset exclusively contains information on ATP matches (not WTA matches), and thus any conclusions drawn will be most relevant to ATP players. 
 
 # Framing the problem
 
