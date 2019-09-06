@@ -347,8 +347,8 @@ for i,pair in enumerate(player_pairs): #run a MC simulation for each player matc
     player1=id_to_name[pair[0]] #get player names
     player2=id_to_name[pair[1]]
     
-    bold_list=MonteCarlo(player1,player2,df,3,10,1000,'bold','timid') #simulate matches when player 1 goes 'bold'
-    timid_list=MonteCarlo(player1,player2,df,3,10,1000,'timid','timid') # simulate matches when player_1 goes 'timid'
+    bold_list=MonteCarlo(player1,player2,df,3,10,10000,'bold','timid') #simulate matches when player 1 goes 'bold'
+    timid_list=MonteCarlo(player1,player2,df,3,10,10000,'timid','timid') # simulate matches when player_1 goes 'timid'
     bold_mean=np.mean(bold_list) #store the means
     timid_mean=np.mean(timid_list)
     real_life_wins=df.loc[pair[0],pair[1]].iloc[-2] #store the actual, real-life number of wins by player 1 in matchup
@@ -362,9 +362,10 @@ for i,pair in enumerate(player_pairs): #run a MC simulation for each player matc
                        'Timid MC results': timid_list,\
                        'Bold MC win percentage':bold_mean,\
                        'Timid MC win percentage': timid_mean,\
-                       'Delta MC Results':bold_mean-timid_mean, \ #difference in expected win percentage obtained from switching strategies
+                       'Delta MC Results':bold_mean-timid_mean,\
                        'Real life win percentages': real_life_wins/real_life_num_matches, \
                        'Real life number of matches': real_life_num_matches}
+    #Delta MC Results--> difference in expected win percentage obtained from switching strategies
     SeriesList.append(pd.Series(new_data))
 
 MC_df=pd.DataFrame(SeriesList).set_index(['Player 1 (P1)','Player 2 (P2)']).sort_index()
