@@ -121,15 +121,15 @@ The following table displays the largest increase in winning percentages expecte
 ![](/data_visualizations/best_win_enhancement.png?raw=true)
 ![](/data_visualizations/active_players_best_win_enhancement.png?raw=true)
 
-As can be seen from the tables, there are some players who could increase their expected win percentage by more than 10% by switching serving strategies.
+As can be seen from the tables, the results suggest that some players may be able to increase their expected win percentage by more than 10% against certain opponents by switching serving strategies.
 
-As expected, many matchups from the EM Factor table reappear in the MC tables, with a few notable exceptions. For example, while Novak Djokovic has a matchup EM of +5% when playing Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in match winning percentage enhancement. This may attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve. On the other hand, for the Monfils vs. Gasquet matchup, Monfils also had a +5% matchup EM. However, he is just 10-7 against Gasquet, so his service point win percentage enhancement had a much larger influence on expected match outcomes. 
+As expected, many player matchups from the earlier EM Factor table reappear in the MC tables, with a few notable exceptions. For example, while Novak Djokovic has a matchup EM of +5% when playing Kei Nishikori, which was tops for active players, their matchup did not place in the top 10 in the match winning percentage enhancement table. This may be attributed to the fact that Novak's head-to-head record against Kei is 16-2, or in other words, he doesn't have much room to improve in terms of winning matches against his opponent. On the other hand, for the Monfils vs. Gasquet matchup, Monfils also had a +5% matchup EM. However, he is just 10-7 against Gasquet, so his EM factor against Gasquet had a much larger influence on helping him win matches against his opponent, leading to a matchup winning percentage enhancement of 10% which was the top mark amongst active player matchups. 
 
 # Conclusion
 
-Tennis, in general, is a game of slim margins. Especially when playing an opponent who you are evenly matched against, small increases in point winning percentage may be able to push you over the edge and allow you to win matchups at non-trivially higher percentages. The analysis conducted here suggests that for certain players whose first serve is quite strong and whose second serve may be a vulnerability against certain opponents, changing serving tactics may in fact provide a slight edge in serve winning percentage and overall match winning percentage as well. 
+Tennis, in general, is a game of slim margins. Especially when playing an opponent who you are evenly matched against, small increases in point winning percentage may have large influences on match outcomes. The analysis conducted here suggests that for certain players whose first serve is quite strong and whose second serve may be a vulnerability against a particular opponent, changing serving tactics may in fact provide a slight edge in serve winning percentage and overall match winning percentage as well. 
 
-In general, whether a strategy (1) or a strategy (2) approach is more successful depends both on the player and their opponent. However, in certain matchups, players may be able to improve their winning percentage against particular opponents by over 10% by switching to an all-first-serve strategy.
+In general, whether a strategy (1) or a strategy (2) approach is more successful depends both on the player and their opponent. However, in certain matchups, players may be able to improve their winning percentage against their opponents by over 10% by switching to an all-first-serve strategy.
 
 # Caveats and suggestions for improvement
 
@@ -145,7 +145,7 @@ However, if such an effect does in fact prove to be significant, perhaps mental 
 
 2) **Fatigue is not an issue**
 
-If pursuing a Strategy (2) approach, hitting increased amounts of first serves may cause players to tire and thus to reduce their serving percentages over the course of a match. It's unclear if this effect is significant. On the other hand, if electing to pursue Strategy (2), the average point and game length will likely be shorter than when pursuing Strategy (1) since first serve points tend to be shorter than second serve points. Perhaps these two effects cancel out and perhaps they do not, but further analysis should be conducted to address this. 
+If pursuing a Strategy (2) approach, hitting increased amounts of first serves may cause players to tire and thus to reduce their serving percentages over the course of a match. Data to assess this possibility has not been analyzed but the theory is certainly plausible. On the other hand, if electing to pursue Strategy (2), the average point and game length will likely be shorter than when pursuing Strategy (1) since first serve points tend to be shorter than second serve points. Perhaps these two effects cancel out and perhaps they do not, but further analysis should be conducted to address this. 
 
 3) **All previous data was obtained from players employing strategy (1)**
 
@@ -155,7 +155,7 @@ Further in the future, data that tracks the mph of each serve may be used to dis
 
 *Room for improvment*
 
-The Monte Carlo simulation proved to be an adequate tool for modeling player winning percentage; however, there was still a nontrivial amount of error associated with this mapping. In the future the Monte Carlo method may be replaced by a machine learning algorithm that may be able to more accurately predict player winning percentages and therefore be employed to more accurately asses the impact of serving strategy on player performance. 
+The Monte Carlo simulation proved to be an adequate tool for modeling player winning percentages; however, there was still a nontrivial amount of error associated with this mapping. In the future the Monte Carlo method may be replaced by a machine learning algorithm that may be able to more accurately predict player winning percentages and therefore be employed to more accurately asses the impact of serving strategy on player performance. 
 
 Similarly, data splits based off of surface type and length of match (best of 3 sets vs. best of 5 sets) may also be incorporated into the modeling to more accurately predict player performance when using different strategies. 
 
