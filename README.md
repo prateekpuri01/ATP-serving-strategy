@@ -5,32 +5,32 @@ Tennis is a sport in which players alternate serving. Each server is allowed two
 # Data statement
 All data that this project was based on was retrieved from Jeff Sackmann's wonderful ATP data repository available at: https://github.com/JeffSackmann/tennis_atp
 
-The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer that 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. 
+The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer than 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. 
 
-This data exclusively contains information on ATP matches (not WTA matches), and thus any conclusions drawn will be most relevant to ATP players. 
+This data exclusively contain information on ATP matches (not WTA matches), and thus any conclusions drawn will be most relevant to ATP players. 
 
 # Framing the problem
 
-The goal of this analysis project is to determine what the most optimal serving strategy is for a given player. 
+The goal of this analysis project is to determine what the optimal serving strategy is for a given player. 
 To frame this problem, let us first define a few parameters for each player:
 
-First serve percentage (FSP): The percentage of times a server makes his/her first serve
-First serve winning percentage (FSWP): The percentage of points that a server wins if his/her first serve lands in
-First serve percentage (SSP): The percentage of times that a server makes his/her second serve
-First serve winning percentage (SSWP): The percentage of points that a server wins if his/her second serve lands in
+**First serve percentage (FSP)**: The percentage of times a server makes his/her first serve <br/>
+**First serve winning percentage (FSWP)**: The percentage of points that a server wins if his/her first serve lands in <br/>
+**First serve percentage (SSP)**: The percentage of times that a server makes his/her second serve <br/>
+**First serve winning percentage (SSWP)**: The percentage of points that a server wins if his/her second serve lands in <br/>
 
 To get feel for how these parameters vary across the ATP, we can plot both serve winning percentage (FSWP,SSWP) and serve make percentage (FSP,SSP) for all ATP players in our dataset. 
 
 ![](/data_visualizations/serve_make_percentages_hist.png?raw=true)
 ![](/data_visualizations/serve_winning_percentages_hist.png?raw=true)
 
-There are two main trends to observe here. Firstly, first serves are more difficult to make than second serves, as expected, with an average ATP FSP of 59% as compared to a SSP average of 89%. However, the ease of making second serves comes at a price. Namely, second serve points are harder to win that first serve point, with an ATP average SSWP of just 48% as compared to an average FSWP of 68%. 
+There are two main trends to observe here. Firstly, first serves are more difficult to make than second serves, as expected, with an average ATP FSP of 59% as compared to a SSP average of 89%. However, the ease of making second serves comes at a price. Namely, second serve points are harder to win than first serve points, with an ATP average SSWP of just 48% as compared to an average FSWP of 68%. 
 
 Moreover, how a player peforms on his/her second serve is rather uncorrelated to how the player performs on his/her first serve, as demonstrated by the following graphs that plots FSWP vs. SSWP
 
 ![](/data_visualizations/first_serve_second_serve_wp_correaltion.png?raw=true)
 
-The lack of strong correlation, demonstrated by the R^2 coefficient of 0.2, suggests that it may be difficult to globally apply an optimal serving strategy to all ATP players. Rather, serving strategies may need to be adjusted to each individual player to account for their first/second serve strengths and weaknesses. 
+The lack of strong correlation, demonstrated by a R^2 coefficient of 0.2, suggests that it may be difficult to globally apply an optimal serving strategy to all ATP players. Rather, serving strategies may need to be adjusted to each individual player to account for their first/second serve strengths and weaknesses. 
 
 # Caveats
 
