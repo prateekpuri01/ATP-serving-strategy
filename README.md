@@ -38,10 +38,10 @@ There a few assumptions that have been made throughout my modeling. Please see t
 
 # Serving strategies
 
-Now there are two serving strategies that are going to be analyzed here
+There are two serving strategies that are going to be analyzed here
 
-Strategy (1): Player hit a first serve and then second serve if needed 
-Strategy (2): Player hit a first serve and then hits another first serve if needed
+**Strategy (1)**: Player hits a first serve and then a second serve if needed 
+**Strategy (2)**: Player hits a first serve and then hits another first serve if needed
 
 Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, has more of a 'high risk/high reward' element. By hitting two first serves, the player has a higher chance of winning a service point if one of his/her serves goes in, but he/she also has a higher risk of double faulting. However, depending on how weak the player's second serve is, this additional risk may still be advantageous. 
 
