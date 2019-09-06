@@ -40,25 +40,25 @@ There a few assumptions that have been made throughout my modeling. Please see t
 
 There are two serving strategies that are going to be analyzed here
 
-**Strategy (1)**: Player hits a first serve and then a second serve if needed 
-**Strategy (2)**: Player hits a first serve and then hits another first serve if needed
+**Strategy (1)**: Player hits a first serve and then a second serve if needed   <br/>
+**Strategy (2)**: Player hits a first serve and then hits another first serve if needed  <br/>
 
-Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, has more of a 'high risk/high reward' element. By hitting two first serves, the player has a higher chance of winning a service point if one of his/her serves goes in, but he/she also has a higher risk of double faulting. However, depending on how weak the player's second serve is, this additional risk may still be advantageous. 
+Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, is extremely rare to see deployed and has more of a 'high risk/high reward' element than Strategy (2). By hitting his/her first serve as a second serve, a player has a higher chance of winning a second serve point if his/her serve goes in, but he/she also has a higher risk of double faulting. However, depending on how weak the player's second serve is, the benefit of the strategy may be worth the risk. 
 
-These strategies are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a service point under the two strategies, we need only look at differencse in probability of winning the second serve. To asses this, we can define the following quantity, labeled the 'enhancement metric (EM)':
+Strategies (1) and (2) are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a service point under the two strategies, we need only look at differencse in probability of winning the second serve point. To asses this, we can define the following quantity, labeled the 'enhancement metric' (EM):
 
 EM = FSP x FSWP-SSP x SSWP
 
-Let's break this down. Conceptually, we are saying that the probability of winning a second serve point is: 
-(chances of making the serve) x (probability of winning point if serve is in)
+Let's break this down. Conceptually, we are saying that the probability of winning a second serve point is: <br/>
+(chances of making the serve) x (probability of winning the point if the serve is in)
 
 For strategy (1), this quantity is FSP x FSWP, whereas for strategy (2), this quantity is SSP x SSWP, and the EM factor simply is the difference in these quantities. 
 
-Thus the EM factor is equivalent to the increase in probability of winning a service point obtained from switching from strategy (1) to strategy (2). Therefore, an EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
+Thus the EM factor is equivalent to the increase in probability of winning a service point associated with switching from strategy (1) to strategy (2). Therefore, an EM factor>0 may imply that strategy (2) would be advantagous over strategy (1) for a particular player, while a EM factor<0 would imply the opposite. 
 
 # Analyzing the EM factor
 
-The following plot is a histogram of the EM factor for ATP players, averaged across all matches that they have played that are recorded in the ATP database
+The following plot is a histogram of the career EM factors for ATP players, averaged across all matches that they have played that are recorded in the ATP database
 
 ![](/data_visualizations/ATP_EM.png?raw=true)
 
@@ -72,7 +72,7 @@ We can also restrict this table to active players
 
 As we can see, there are certain players who could expect to win over 5% more service points, on average, by switching from strategy (1) to strategy (2). 
 
-Qualitatively, what determines whether a player will benefit from a strategy switch? The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in lengthy baseline exchanges, which can frequently occur during second serves since the return is put in play at a higher rate. This second factor serves to decrease their SSWP and make strategy (2) further favorable. 
+Qualitatively, what determines whether a player will benefit from a strategy switch? The majority of players listed in these tables are known for having powerful first serves, which makes strategy (2) beneficial for them since it allows them to put as many first serves in play as possible. Further, many of these players are not known for being particularly adept in lengthy baseline exchanges, which can frequently occur during second serves since the return is put in play at a higher rate than it is with first serves. This second factor serves to decrease these players' SSWP and make strategy (2) further favorable. 
 
 The above tables display serving statistics averaged across all recorded career matches. However, in reality, a player's FSWP and SSWP will depend on who they are playing. Is it always advantageous for a player with a career EM Factor>0 to employ serving strategy (2)? Perhaps not. As a case study, look at Goran Ivanisevic's EM versus all opponents he's played at least **5 matches** with. 
 
@@ -90,9 +90,9 @@ Once again we can also restrict ourselves to active player matchups
 
 ![](/data_visualizations/active_players_top_EM_matchups.png?raw=true)
 
-What are the qualitative similarities in these matchups? These tables, for the most part, are filled with players with powerful first serves who are playing opponents known for strong baseline games. Against these crafty baseline players, the servers do not have a high chance of winning their second serve points; therefore, they can benefit by hitting their more powerful serves more often, even at the expense of additional double faults. 
+What are the qualitative similarities in these matchups? These tables, for the most part, are filled with players with powerful first serves who are playing opponents known for strong baseline games. Their opponent's crafty baseline game may limit the server's ability to win second serve points; therefore, the server can benefit from hitting their more powerful first serve more often, even at the expense of additional double faults. 
 
-We can take Pete Sampras vs Andre Agassi as a case study. According to my results, Sampras coud have won roughly 6.1% more service points by switching to strategy (2) from strategy (1). Why? Sampras is known for having an incredible serve; however, Agassi is also regarded as one of the best serve returners of all time. However, when these forces are pitted against one another on second serve points, Agassi has the advantage. His strong return game gave him a 54% chance of winning a second serve point against Sampras, however this dropped to just 20% when Sampras made his first serve. The EM factor results suggest that Sampras can nullify Agassi's strong return by putting his first serve in play more often. 
+We can take Pete Sampras vs. Andre Agassi as a case study. According to the above table, Sampras coud have won roughly 6.1% more service points by switching to strategy (2) from strategy (1). Why? Agassi's strong return game gave him a 54% chance of winning a second serve point against Sampras; however this dropped to just 20% when Sampras made his first serve. Sampras's high EM factor against Agassi results suggest that he may have been able to nullify Agassi's strong return game by putting his first serve in play more often. 
 
 # Modeling how strategy switches can modify match outcomes
 
@@ -100,7 +100,7 @@ The above analysis informs us that certain players may win more service points b
 
 First question: How trustworthy are Monte Carlo (MC) simulations at predicting match outcomes? To assess this question, I performed my MC analysis on all head-to-head player matchups with a match history of **at least 10 matches** (1000 simulations per matchup, best-of-5 set matches). I then compared by MC results to each real life head-to-head win-loss record. In this initial Monte Carlo simulation, I assumed each player obeyed Strategy (1), as is overwhelmingly the case with ATP players.
 
-Here are the results, along with confidence and prediction bands to a linear fit to the data
+Here are the results (x-errors represent 68% confidence intervals), along with confidence and prediction bands to a linear fit to the data
 
 ![](/data_visualizations/monte_carlo_calibration.png?raw=true)
 
