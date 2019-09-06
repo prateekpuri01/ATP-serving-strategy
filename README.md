@@ -45,7 +45,7 @@ There are two serving strategies that are going to be analyzed here
 
 Strategy (1) is fairly conventional and has been adopted by nearly all ATP players historically. Strategy (2), on the other hand, is extremely rare to see deployed and has more of a 'high risk/high reward' element than Strategy (2). By hitting a first serve as a second serve, a player has a higher chance of winning a second serve point if the serve goes in, but he also has a higher risk of double faulting. However, depending on how weak the player's second serve is, the benefit of the strategy may be worth the risk. 
 
-Strategies (1) and (2) are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a service point under the two strategies, we need only look at differencse in probability of winning the second serve point. To asses this, we can define the following quantity, labeled the 'enhancement metric' (EM):
+Strategies (1) and (2) are identical except for the second serve that is hit. Therefore, to asses the differences in probability (Delta P) of winning a service point under the two strategies, we need only look at difference in probability of winning the second serve point. To asses this, we can define the following quantity, labeled the 'enhancement metric' (EM):
 
 EM = FSP x FSWP-SSP x SSWP
 
