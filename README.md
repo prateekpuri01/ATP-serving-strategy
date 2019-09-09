@@ -24,7 +24,7 @@ To get feel for how these parameters vary across the ATP, we can plot both serve
 ![](/data_visualizations/serve_make_percentages_hist.png?raw=true)
 ![](/data_visualizations/serve_winning_percentages_hist.png?raw=true)
 
-There are two main trends to observe here. Firstly, first serves are more difficult to make than second serves, as expected, with an average ATP FSP of 59% as compared to a SSP average of 89%. However, the ease of making second serves comes at a price. Namely, second serve points are harder to win than first serve points, with an ATP average SSWP of just 48% as compared to an average FSWP of 68%. 
+There are two main trends to observe here. Firstly, first serves are more difficult to make than second serves, as expected, with an average ATP FSP of 60% as compared to a SSP average of 89%. However, the ease of making second serves comes at a price. Namely, second serve points are harder to win than first serve points, with an ATP average SSWP of just 46% as compared to an average FSWP of 66%. 
 
 Moreover, how an ATP player peforms on his second serve is rather uncorrelated to how the player performs on his first serve, as demonstrated by the following graphs that plots FSWP vs. SSWP
 
