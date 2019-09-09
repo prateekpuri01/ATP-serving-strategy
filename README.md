@@ -3,7 +3,7 @@
 Tennis is a sport in which players alternate serving. Each server is allowed two attempts to make a serve before being penalized a point for what is known as a 'double fault'. The conventional is for a server to first hit a difficult, high-speed 'first serve' and then to hit a safer, lower-speed 'second serve' if his/her first serve did not go in. While this strategy is sound for many players, this project aims to identify head-to-head player matchups in which it may be beneficial for players to elect for a riskier strategy in which two first serves are attempted on all service points. The hope is the results of this study can be used to guide player strategies and optimize match performance.
 
 # Data statement
-All data that this project was based on was retrieved from Jeff Sackmann's wonderful ATP data repository available at: https://github.com/JeffSackmann/tennis_atp
+All data that this project was based on was retrieved from Jeff Sackmann's wonderful ATP data repository (protected by a [Creative Common license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)) available at: https://github.com/JeffSackmann/tennis_atp
 
 The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer than 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. Lastly, matches in which each player hit fewer than 20 first serves or fewer than 10 second serves were excluded from the dataset to effectively remove matches decided by player retirement or other unusual circumstances. 
 
