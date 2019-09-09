@@ -137,7 +137,7 @@ The following assumptions are inherent to the modeling in this project
 
 *Assumptions*
 
-1) **Players serves percentages are static**
+1) **Player serves percentages are static**
 
 This may not always be the case. It's one thing to fire away first serves at the beginning of a match and quite another to do so at critical junctures. Under strategy (2), my modeling assumes that a player is able to serve with the same percentages in both situations. However, if a player is facing a match point, will they be able to hit first serves at the same percentage they have been all match? Further analysis is needed to address this concern fully. 
 
