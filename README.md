@@ -5,7 +5,7 @@ Tennis is a sport in which players alternate serving. Each server is allowed two
 # Data statement
 All data that this project was based on was retrieved from Jeff Sackmann's wonderful ATP data repository available at: https://github.com/JeffSackmann/tennis_atp
 
-The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer than 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. 
+The data files contain information on ATP matches from 1991-2019, and thus my analysis is retricted to this subset. Further, matches with players with fewer than 50 career ATP matches were cut from the dataset in order to further restrict my analysis to players with significant ATP experience. Lastly, matches in which each player hit fewer than 20 first serves or fewer than 10 second serves were excluded from the dataset to effectively remove matches decided by player retirement or other unusual circumstances. 
 
 This dataset exclusively contains information on ATP matches (not WTA matches), and thus any conclusions drawn will be most relevant to ATP players. 
 
