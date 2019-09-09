@@ -66,7 +66,7 @@ As can been seen from the dotted line, the average EM factor is < 0, implying th
 
 ![](/data_visualizations/career_top_EM.png?raw=true)
 
-We can also restrict this table to active players (I not that as of the writing of this document, Julien Benneteau's retirement status in unclear and thus he will be considered active)
+We can also restrict this table to active players (I note that as of the writing of this document, Julien Benneteau's retirement status in unclear and thus he will be considered active)
 
 ![](/data_visualizations/active_players_top_career_EM.png?raw=true)
 
