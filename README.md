@@ -78,7 +78,7 @@ The above tables display serving statistics averaged across all recorded career 
 
 ![](/data_visualizations/Goran_Ivanisevic_matchup_EM.png?raw=true)
 
-Even though Ivanisevic's career EM is quite high (.028), we see that his EM factor against certain opponent varies substantially. Even though, on average, he would appear to benefit from strategy (2), against certain opponents strategy (1) is clearly preferable. 
+Even though Ivanisevic's career EM is quite high (>.02), we see that his EM factor against certain opponent varies substantially. Even though, on average, he would appear to benefit from strategy (2), against certain opponents strategy (1) is clearly preferable. 
 
 Certain opponents simply return first/second serves better than other opponents, and these effects will guide which strategy is optimal when playing them. Therefore, we can reconstruct the above tables while restricting ourselves to a player's serving statistics against a particular player. Here, we will restrict ourselves to players who have played each other a minimum of **10 times** so that we may have a resonable amount of data to sample.
 
