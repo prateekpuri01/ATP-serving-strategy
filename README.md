@@ -30,7 +30,7 @@ Moreover, how an ATP player peforms on his second serve is rather uncorrelated t
 
 ![](/data_visualizations/first_serve_second_serve_wp_correaltion.png?raw=true)
 
-The lack of strong correlation, demonstrated by a R^2 coefficient of 0.2, suggests that it may be difficult to globally apply an optimal serving strategy to all ATP players. Rather, serving strategies may need to be adjusted to each individual player to account for their first/second serve strengths and weaknesses. 
+The lack of strong correlation, demonstrated by a R^2 coefficient of 0.32, suggests that it may be difficult to globally apply an optimal serving strategy to all ATP players. Rather, serving strategies may need to be adjusted to each individual player to account for their first/second serve strengths and weaknesses. 
 
 # Caveats
 
