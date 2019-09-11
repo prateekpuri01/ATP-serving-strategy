@@ -58,7 +58,7 @@ Thus the EM factor is equivalent to the increase in probability of winning a ser
 
 # Analyzing the EM factor
 
-The following plot is a histogram of the career EM factors for ATP players, averaged across all matches that they have played that are recorded in the ATP database
+The following plot is a histogram of the career EM factors for ATP players who have played at least 50 matches, averaged across all matches that they have played that are recorded in the ATP database
 
 ![](/data_visualizations/ATP_EM.png?raw=true)
 
