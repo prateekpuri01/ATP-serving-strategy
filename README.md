@@ -118,7 +118,7 @@ The MC simulations appear to be a reasonable predictor of head-to-head match win
 
 I can now repeat my Monte Carlo simulations when using two serving strategies: strategy (1) and strategy (2). After performing the simulations, I can convert the MC results to expected real life win percentages by using the linear fit calibration function that I calculated in the previous section.
 
-The following table displays the largest expected increase in winning percentage expected from switching from strategy (1) to strategy (2) for both post-1991 (first table) and active (second table) player matchups. The error bars represent 68% confidence interval bands based on errors in the fit function in the previous section.
+The following table displays the largest expected increase in winning percentage expected from switching from strategy (1) to strategy (2) for both post-1991 (first table) and active (second table) player matchups, when restricting such matchups to top-30 players who have played at least 10 matches against one another. The error bars represent 68% confidence interval bands based on errors in the fit function in the previous section.
 
 ![](/data_visualizations/best_win_enhancement.png?raw=true)
 ![](/data_visualizations/active_players_best_win_enhancement.png?raw=true)
