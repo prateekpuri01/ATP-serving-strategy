@@ -118,6 +118,11 @@ The MC simulations appear to be a reasonable predictor of head-to-head match win
 
 I can now repeat my Monte Carlo simulations when using two serving strategies: strategy (1) and strategy (2). After performing the simulations, I can convert the MC results to expected real life win percentages by using the linear fit calibration function that I calculated in the previous section.
 
+For each matchup involving active top-30 players (P1 vs. P2), the following plot displays the MC predicted winning percentage (WP) for P1 against P2 when P1 is using both a safe and risky serving strategy. 
+![](/data_visualizations/MC_results_visualization.png?raw=true)
+
+As can be seen from the plot, P1 could only expect to benefit from a risky approach in roughly 20% of matchups. Further, the matchups in which risky strategies are preferred tend to be ones where the safe strategy WP <0.5. On the other hand, players who are already winning quite often using a safe strategy (WP >0.5) rarely would benefit from a strategy switch. In other words, if you're consistently losing against a player, a change in strategy may be helpful, but if you're already winning often then changing tactics is unlikely to help you additionally.  
+
 The following table displays the largest expected increase in winning percentage expected from switching from strategy (1) to strategy (2) for both post-1991 (first table) and active (second table) player matchups, when restricting such matchups to top-30 players who have played at least 10 matches against one another. The error bars represent 68% confidence interval bands based on errors in the fit function in the previous section.
 
 ![](/data_visualizations/best_win_enhancement.png?raw=true)
