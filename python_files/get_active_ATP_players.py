@@ -74,7 +74,7 @@ sql_command = pd.read_sql_query(
 df = pd.DataFrame(sql_command)
 df.columns=table_columns
 #we will define active players as players who have played a match in 2017 or later
-yearCutoff=2016
+yearCutoff=2018
 df=df[df['Match year']>yearCutoff]
 active_player_list=list(set(df["Player 1 (P1)"].tolist()+df["Player 2 (P2)"].tolist()))
 

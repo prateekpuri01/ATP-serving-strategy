@@ -76,8 +76,8 @@ df.columns=table_columns
 #matches where players retired or situations in which match data was not input
 
 minServes=20
-df=df[(df['P1 first serve points total']>minServes) & (df['P1 second serve points total']>minServes) & \
-      (df['P2 first serve points total']>minServes) & (df['P2 second serve points total']>minServes)]
+df=df[(df['P1 first serve points total']>minServes) & (df['P1 second serve points total']>minServes/2) & \
+      (df['P2 first serve points total']>minServes) & (df['P2 second serve points total']>minServes/2)]
 
 #Now I want to create a dictionary that can map player ID numbers to actual names and vice versa
 f=open('atp_players.csv')
@@ -101,12 +101,14 @@ with open(pickle_file, 'wb') as handle:
 pickle_file = "id_to_name.pkl"
 with open(pickle_file, 'wb') as handle:
     pickle.dump(id_to_name, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
-#%%
-        
+    
 #the winnings player (P1) and the losing player (P2) will be set as the  
 #multi-index for the dataframe
-df=df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_index()
+df=df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_index()   
+df.to_pickle(r'raw_database_data.pkl')
+
+#%%
+
 serve_percentages={}
 num_matches={}
 
@@ -180,10 +182,6 @@ df=df[(df['Player 1 (P1)'].apply(lambda x: num_matches[x]>=match_cutoff)) & \
     
 df=df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_index()
 
-#the filled_df will store head to head player data
-filled_df=pd.DataFrame(columns=['Player 1 (P1)', 'Player 2 (P2)', 'P1 Win EM Series', \
-                                'P1 Loss EM Series','P1 Total EM Series','P1 Win EM'\
-                                ,'P1 Loss EM', 'P1 Global EM','Number of Matches','Serve percentages','Career EM Factor'])
 
 #extract all player matchups in our database   
 player_pairs=df.index.values.tolist()

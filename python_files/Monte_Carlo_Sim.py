@@ -10,6 +10,10 @@ import random
 import pandas as pd
 import numpy as np
 import pickle
+import os
+
+path="C:\\Users\\Anjana Puri\\Documents\\Python\\TennisProject\\JosephSackmann Data\\tennis_atp-master\\tennis_atp-master"
+os.chdir(path)
 
 #import necessary player info files and dataframes
 
@@ -28,12 +32,19 @@ with open(pickle_file, 'rb') as handle:
 pickle_file = "id_to_name.pkl"
 with open(pickle_file, 'rb') as handle:
     id_to_name = pickle.load(handle)
+    
+pickle_file = "player_serve_history.pkl"
+with open(pickle_file, 'rb') as handle:
+    serve_dict = pickle.load(handle)
 
 df = pd.read_pickle('enhancement_metrics.pkl')
+df= df[df['Number of Matches']>=5]
 
 #%%
 
 """ simPoint: function that simulates whether a server wins a servus point
+              inputs: 
+              
               player_fsp: server's first serve make percentage
               player_fswp: server's first serve winning percentage
               player_ssp: server's second serve make percentage
@@ -77,6 +88,8 @@ def simPoint(player_fsp,player_fswp,player_ssp,player_sswp,strategy='timid'):
 
 
 """ simGame: function that simulates a service game
+              inputs:
+              
               player_fsp: server's first serve make percentage
               player_fswp: server's first serve winning percentage
               player_ssp: server's second serve make percentage
@@ -105,6 +118,8 @@ def simGame(player_fsp,player_fswp,player_ssp,player_sswp,strategy='timid'):
     
 
 """ simTieBreaker: function that simulates a tiebreaker
+              inputs:
+              
               player1_fsp: initial server's first serve make percentage
               player1_fswp: initial server's first serve winning percentage
               player1_ssp: initial server's second serve make percentage
@@ -165,6 +180,9 @@ def simTieBreaker(player1_fsp,player1_fswp,player1_ssp,player1_sswp,\
     
     
 """ simSet:   function that simulates a set
+
+              inputs:
+              
               player1_fsp: initial server's first serve make percentage
               player1_fswp: initial server's first serve winning percentage
               player1_ssp: initial server's second serve make percentage
@@ -248,6 +266,8 @@ def simSet(player1_fsp,player1_fswp,player1_ssp,player1_sswp,\
     
 """ simMatch:   function that simulates a match
         
+              inputs:
+              
               sets_to_win: number of sets needed to win match, either 3 or 5 in ATP
               player1_fsp: initial server's first serve make percentage
               player1_fswp: initial server's first serve winning percentage
@@ -293,7 +313,8 @@ def simMatch (sets_to_win,player1_fsp,player1_fswp,player1_ssp,player1_sswp,\
         return False
         
 """ MonteCarlo:  simulates a specify number of matches between two players using serving data from their matchup history
-        
+
+             inputs:
                 player 1: string of player 1 name
                 player 2: string of player 2 name
                 dataFrame: dataFrame containing player matchup data
@@ -310,12 +331,15 @@ def simMatch (sets_to_win,player1_fsp,player1_fswp,player1_ssp,player1_sswp,\
 
 def MonteCarlo(player1,player2,dataFrame,num_sets,num_trials,num_sims_per_trial,player1_strategy='timid',player2_strategy='timid'):
     
+    
+    
     player1_id=name_to_id[player1] #get player ids
     player2_id=name_to_id[player2]
-    player1_fsp=player_serve_info[player1_id][0] #get first/second serve make percentages for each player
-    player1_ssp=player_serve_info[player1_id][1]
-    player2_fsp=player_serve_info[player2_id][0]
-    player2_ssp=player_serve_info[player2_id][1]
+    player1_serve_dist=serve_dict[player1_id]
+    player2_serve_dist=serve_dict[player2_id]
+    
+
+
     
     p1_serve_data=dataFrame.loc[player1_id,player2_id]['Serve percentages'] #get fswp and sswp in player matchup for each player from dataframe 
     player1_fswp=p1_serve_data[1]
@@ -324,21 +348,27 @@ def MonteCarlo(player1,player2,dataFrame,num_sets,num_trials,num_sims_per_trial,
     player2_fswp=p2_serve_data[1]
     player2_sswp=p2_serve_data[3]
     
-
-    trial_results=[]
+    trial_results=[0]*num_trials
     for i in range(num_trials):
         player_1_wins=0 #keep track of player 1 wins
         for num in range(num_sims_per_trial):
+            player1_fsp=random.choice(player1_serve_dist[0]) #get first/second serve make percentages for each player
+            player1_ssp=random.choice(player1_serve_dist[1]) #by sampling from distribution of fsp,ssp for each player
+            player2_fsp=random.choice(player2_serve_dist[0]) 
+            player2_ssp=random.choice(player2_serve_dist[1]) 
             if simMatch(num_sets,player1_fsp,player1_fswp,player1_ssp,player1_sswp,\
                         player2_fsp,player2_fswp,player2_ssp,player2_sswp,player1_strategy,player2_strategy):
                 player_1_wins+=1 #if player 1 wins the match, update his win total
-        trial_results.append(player_1_wins/num_sims_per_trial) #append match winning percentage to list
+        trial_results[i]=player_1_wins/num_sims_per_trial #append match winning percentage to list
         
     return trial_results #return list
               
 player_pairs=list(df.index) #get all player pairs in dataFrame
-SeriesList=[] #dataSeries will be appended to this empty list and eventually used to construct a dataframe
 numPairs=len(player_pairs)
+SeriesList=[0]*numPairs #dataSeries will be appended to this empty list and eventually used to construct a dataframe
+
+
+#%%
 for i,pair in enumerate(player_pairs): #run a MC simulation for each player matchup
     
     if i%10==0:
@@ -346,9 +376,8 @@ for i,pair in enumerate(player_pairs): #run a MC simulation for each player matc
         
     player1=id_to_name[pair[0]] #get player names
     player2=id_to_name[pair[1]]
-    
-    bold_list=MonteCarlo(player1,player2,df,3,10,10000,'bold','timid') #simulate matches when player 1 goes 'bold'
-    timid_list=MonteCarlo(player1,player2,df,3,10,10000,'timid','timid') # simulate matches when player_1 goes 'timid'
+    bold_list=MonteCarlo(player1,player2,df,3,10,1000,'bold','timid') #simulate matches when player 1 goes 'bold'
+    timid_list=MonteCarlo(player1,player2,df,3,10,1000,'timid','timid') # simulate matches when player_1 goes 'timid'
     bold_mean=np.mean(bold_list) #store the means
     timid_mean=np.mean(timid_list)
     real_life_wins=df.loc[pair[0],pair[1]].iloc[-2] #store the actual, real-life number of wins by player 1 in matchup
@@ -366,7 +395,7 @@ for i,pair in enumerate(player_pairs): #run a MC simulation for each player matc
                        'Real life win percentages': real_life_wins/real_life_num_matches, \
                        'Real life number of matches': real_life_num_matches}
     #Delta MC Results--> difference in expected win percentage obtained from switching strategies
-    SeriesList.append(pd.Series(new_data))
+    SeriesList[i]=pd.Series(new_data)
 
 MC_df=pd.DataFrame(SeriesList).set_index(['Player 1 (P1)','Player 2 (P2)']).sort_index()
 MC_df.to_pickle(r'MC_results.pkl') #save results

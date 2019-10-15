@@ -63,13 +63,20 @@ with open('active_players.csv', 'r') as f:
     player_list = list(reader)
 active_player_list=[''.join(x) for x in list(filter(lambda a: a != [], player_list))]    
 
+with open('top_30_players.csv', 'r') as f:
+    reader = csv.reader(f)
+    top_player_list = list(reader)
+top_player_list=[''.join(x) for x in list(filter(lambda a: a != [], top_player_list))] 
 
 os.chdir('C:/Users/Anjana Puri/Documents/Python/TennisProject/JosephSackmann Data/tennis_atp-master/tennis_atp-master')
 mc_df= pd.read_pickle('MC_results.pkl')
 
+
 #%%
 
 #first I'm going to take the 'timid' strategy MC results and compare them to real life head-to-head winning percentages
+
+
 minMatches=10
 plt.clf()
 xlist=mc_df[mc_df['Real life number of matches']>=minMatches]["Timid MC win percentage"] #get timid MC winning percentages
@@ -111,6 +118,25 @@ px = np.linspace(-.2, 1.2, 100)
 py = a*px+b
 nom = unp.nominal_values(py) 
 std = unp.std_devs(py)
+
+"""
+computes the prediction bands of a given model fit to a set of data
+
+inputs:
+    x: range of points over which to plot bands
+    xd: x values for data
+    yd: y values for data
+    p: fit parameters
+    func: fitted model
+    conf: confidence level
+
+output:
+    lpd, upd: lower/upper prediction bands
+
+
+
+
+"""
 
 def predband(x, xd, yd, p, func, conf=0.95): #function that plots prediction bands
     # x = requested points
@@ -167,16 +193,42 @@ model_offset=b.nominal_value
 model_offset_std=b.std_dev
 mc_df= pd.read_pickle('MC_results.pkl')
 
+
+"""
+converts a difference in monte carlo win percentage to a differnce in real life win percentage using the above fitted functions
+
+inputs
+    WP1: MC WP with strategy 1
+    WP2: MC WP with strategy 2
+    
+output:
+    delta WP = calibrated difference in win percentage for two strategies
+
+"""
+
 def calculate_diff(WP1,WP2): #WP1 = MC winning percentage with strategy (x), WP2= MC winning percentage with strategy (y)
                             #return: expected difference in real-life win percentages according to earlier fit function
     return model_scale*(WP1-WP2)
+
+
+"""
+calculates the error in the WP difference calculation
+
+inputs
+    WP1: MC WP with strategy 1
+    WP2: MC WP with strategy 2
+    
+output:
+    delta WP error = 1 sigma error in calibrated difference in win percentage for two strategies
+
+"""
 
 def calculate_diff_errors(WP1,WP2): #calculates 68% confidence interval standard errors, againt according to fit function
     err1=((WP1**2)*(model_scale_std**2)+model_offset_std**2)**.5 #error associated with WP1
     err2=((WP2**2)*(model_scale_std**2)+model_offset_std**2)**.5 #error associated with WP2
     return (err1**2+err2**2)**.5 #quadruture sum error
 
-def bar_graph_header(p1,p2): #return string tha reads 'p1 vs. p2' 
+def bar_graph_header(p1,p2): #return string that reads 'p1 vs. p2' 
     return p1+ " vs. " + p2
 
 mc_df=mc_df[mc_df['Real life number of matches']>=minMatches]
@@ -185,7 +237,11 @@ mc_df['Model difference errors']=list(map(calculate_diff_errors,mc_df['Bold MC w
 
 
 #%%
-all_matchups_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Model differences','Model difference errors']].sort_values(by='Model differences',ascending=False).iloc[:10]
+minMatches=10
+all_matchups_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Real life number of matches','Model differences','Model difference errors']]
+all_matchups_list=all_matchups_list[all_matchups_list['Player 1 Name'].apply(lambda x: name_to_id[x] in top_player_list) & all_matchups_list['Player 2 Name'].apply(lambda x: name_to_id[x] in top_player_list)]
+all_matchups_list=all_matchups_list[all_matchups_list['Real life number of matches']>=minMatches]
+all_matchups_list=all_matchups_list.sort_values(by='Model differences',ascending=False).iloc[:10]
 matchup_labels = list(map(bar_graph_header,all_matchups_list['Player 1 Name'],all_matchups_list['Player 2 Name']))[::-1]
 model_differences = list(all_matchups_list['Model differences'])[::-1]
 
@@ -194,7 +250,7 @@ width = 0.75 # the width of the bars
 ind = np.arange(len(model_differences))  # the x locations for the groups
 
 ax.barh(ind, model_differences, width, xerr=all_matchups_list['Model difference errors'],capsize=10,color="dodgerblue")
-ax.set_yticks(ind+width/2)
+ax.set_yticks(ind+width/2-.25)
 ax.set_yticklabels(matchup_labels, minor=False)
 plt.title('Post 1991 matchups')
 plt.xlabel('Difference in match winning percentage',fontsize=20)
@@ -204,7 +260,10 @@ for i, v in enumerate(model_differences):
 plt.savefig(os.path.join('best_win_enhancement.png'), dpi=300, format='png', bbox_inches='tight') # use format='svg' or 'pdf' for vectorial pictures
 plt.show()
 #%%
-all_matchups_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Model differences','Model difference errors']].sort_values(by='Model differences',ascending=True).iloc[:10]
+all_matchups_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Real life number of matches','Model differences','Model difference errors']]
+all_matchups_list=all_matchups_list[all_matchups_list['Player 1 Name'].apply(lambda x: name_to_id[x] in top_player_list) & all_matchups_list['Player 2 Name'].apply(lambda x: name_to_id[x] in top_player_list)]
+all_matchups_list=all_matchups_list[all_matchups_list['Real life number of matches']>=minMatches]
+all_matchups_list=all_matchups_list.sort_values(by='Model differences',ascending=True).iloc[:10]
 matchup_labels = list(map(bar_graph_header,all_matchups_list['Player 1 Name'],all_matchups_list['Player 2 Name']))[::-1]
 model_differences = list(all_matchups_list['Model differences'])[::-1]
 
@@ -212,7 +271,7 @@ fig, ax = plt.subplots()
 width = 0.75 # the width of the bars 
 ind = np.arange(len(model_differences))  # the x locations for the groups
 ax.barh(ind, model_differences, width, xerr=all_matchups_list['Model difference errors'],capsize=10,color="red")
-ax.set_yticks(ind+width/2)
+ax.set_yticks(ind+width/2-.25)
 ax.set_yticklabels(matchup_labels, minor=False)
 plt.title('Post 1991 matchups')
 plt.xlabel('Difference in match winning percentage',fontsize=20)
@@ -224,11 +283,12 @@ plt.show()
 
 
 #%%
-
-active_matchup_list=mc_df.copy().reset_index()[['Player 1 (P1)','Player 2 (P2)','Player 1 Name','Player 2 Name','Model differences','Model difference errors']].sort_values(by='Model differences',ascending=False)
-selection1=list(active_matchup_list['Player 1 (P1)'].apply(lambda x:  True if x in active_player_list else False))
+active_matchup_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Real life number of matches','Model differences','Model difference errors']]
+active_matchup_list=active_matchup_list[active_matchup_list['Player 1 Name'].apply(lambda x: name_to_id[x] in top_player_list) & active_matchup_list['Player 2 Name'].apply(lambda x: name_to_id[x] in top_player_list)]
+active_matchup_list=active_matchup_list[active_matchup_list['Real life number of matches']>=minMatches].sort_values(by='Model differences',ascending=False)
+selection1=list(active_matchup_list['Player 1 Name'].apply(lambda x:  True if name_to_id[x] in active_player_list else False))
 active_matchup_list=active_matchup_list[selection1]
-selection2=list(active_matchup_list['Player 2 (P2)'].apply(lambda x: True if x in active_player_list else False))
+selection2=list(active_matchup_list['Player 2 Name'].apply(lambda x: True if name_to_id[x] in active_player_list else False))
 active_matchup_list=active_matchup_list[selection2][['Player 1 Name','Player 2 Name','Model differences','Model difference errors']].iloc[:10]
 
 matchup_labels = list(map(bar_graph_header,active_matchup_list['Player 1 Name'],active_matchup_list['Player 2 Name']))[::-1]
@@ -238,7 +298,7 @@ fig, ax = plt.subplots()
 width = 0.75 # the width of the bars 
 ind = np.arange(len(model_differences))  # the x locations for the groups
 ax.barh(ind, model_differences, width, xerr=active_matchup_list['Model difference errors'],capsize=10,color="dodgerblue")
-ax.set_yticks(ind+width/2)
+ax.set_yticks(ind+width/2-.25)
 ax.set_yticklabels(matchup_labels, minor=False)
 plt.title('Active player matchups',fontsize=20)
 plt.xlabel('Difference in match winning percentage',fontsize=20)
@@ -250,12 +310,13 @@ plt.show()
 
 
 #%%
-active_matchup_list=mc_df.copy().reset_index()[['Player 1 (P1)','Player 2 (P2)','Player 1 Name','Player 2 Name','Model differences','Model difference errors']].sort_values(by='Model differences')
-selection1=list(active_matchup_list['Player 1 (P1)'].apply(lambda x:  True if x in active_player_list else False))
+active_matchup_list=mc_df.copy().reset_index()[['Player 1 Name','Player 2 Name','Real life number of matches','Model differences','Model difference errors']]
+active_matchup_list=active_matchup_list[active_matchup_list['Player 1 Name'].apply(lambda x: name_to_id[x] in top_player_list) & active_matchup_list['Player 2 Name'].apply(lambda x: name_to_id[x] in top_player_list)]
+active_matchup_list=active_matchup_list[active_matchup_list['Real life number of matches']>=minMatches].sort_values(by='Model differences')
+selection1=list(active_matchup_list['Player 1 Name'].apply(lambda x:  True if name_to_id[x] in active_player_list else False))
 active_matchup_list=active_matchup_list[selection1]
-selection2=list(active_matchup_list['Player 2 (P2)'].apply(lambda x: True if x in active_player_list else False))
+selection2=list(active_matchup_list['Player 2 Name'].apply(lambda x: True if name_to_id[x] in active_player_list else False))
 active_matchup_list=active_matchup_list[selection2][['Player 1 Name','Player 2 Name','Model differences','Model difference errors']].iloc[:10]
-
 matchup_labels = list(map(bar_graph_header,active_matchup_list['Player 1 Name'],active_matchup_list['Player 2 Name']))[::-1]
 model_differences = list(active_matchup_list['Model differences'])[::-1]
 
@@ -263,7 +324,7 @@ fig, ax = plt.subplots()
 width = 0.75 # the width of the bars 
 ind = np.arange(len(model_differences))  # the x locations for the groups
 ax.barh(ind, model_differences, width, xerr=active_matchup_list['Model difference errors'],capsize=10,color="red")
-ax.set_yticks(ind+width/2)
+ax.set_yticks(ind+width/2-.25)
 ax.set_yticklabels(matchup_labels , minor=False)
 plt.title('Active player matchups')
 plt.xlabel('Difference in match winning percentage',fontsize=20)

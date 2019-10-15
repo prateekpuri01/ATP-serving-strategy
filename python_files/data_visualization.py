@@ -13,6 +13,9 @@ import numpy as np
 import pickle
 import csv
 import os
+
+path="C:\\Users\\Anjana Puri\\Documents\\Python\\TennisProject\\JosephSackmann Data\\tennis_atp-master\\tennis_atp-master"
+os.chdir(path)
 #%%
 
 #set textstyles for plot
@@ -20,6 +23,9 @@ font = {'family' : 'normal',
         'weight' : 'normal',
         'size'   : 11}
 matplotlib.rc('font', **font)
+
+plt.rc('xtick',labelsize=20)
+plt.rc('ytick',labelsize=20)
 
 pickle_file = "player_serve_info.pkl"
 with open(pickle_file, 'rb') as handle:
@@ -44,20 +50,35 @@ with open('active_players.csv', 'r') as f:
     player_list = list(reader)
 active_player_list=[''.join(x) for x in list(filter(lambda a: a != [], player_list))]
 
+with open('top_30_players.csv', 'r') as f:
+    reader = csv.reader(f)
+    top_player_list = list(reader)
+top_player_list=[''.join(x) for x in list(filter(lambda a: a != [], top_player_list))] 
+
 #%%
 
 #plot career EM factors for all ATP players in database
+#
+#EM_list=[]
+#
+#for x in top_player_list:
+#    if x in active_player_list:
+#        try:
+#            EM_list.append(player_serve_info[x][-1])
+#        except KeyError:
+#            continue
 EM_list=[i[-1] for i in list(player_serve_info.values())]
 #number of histogram bins
 num_bins=50
 plt.clf()
 plt.xlim([min(EM_list), max(EM_list)])
 plt.hist(EM_list, bins=num_bins, alpha=0.5,color='c')
-plt.title('Serve win percentage enhancement',fontsize=15)
-plt.xlabel(r'$EM = FSP \times FSWP-SSP \times SSWP$', fontsize=15)
-plt.ylabel('Count',fontsize=15)
+plt.title('Serve win percentage enhancement',fontsize=20)
+plt.xlabel(r'$EM = FSP \times FSWP-SSP \times SSWP$', fontsize=20)
+plt.ylabel('Count',fontsize=20)
 #plot average as well
 plt.axvline(x=np.mean(EM_list), linewidth=5, color='r', linestyle='dashed')
+plt.text(np.mean(EM_list)+.05,150,'Mean: ' + str(round(np.mean(EM_list),3)),rotation=0,fontsize=15)
 plt.tight_layout()
 plt.savefig(os.path.join('ATP_EM.png'), dpi=300, format='png', bbox_inches='tight') # use format='svg' or 'pdf' for vectorial pictures
 
@@ -70,7 +91,7 @@ plt.show()
 
 min_matches=100
 top10=sorted([(id_to_name[k],round(v[-1],3)) for k,v in player_serve_info.items() \
-              if num_matches[k]>min_matches],key=lambda x:x[1],reverse=True)[:10][::-1]
+              if (num_matches[k]>min_matches) and (k in top_player_list)],key=lambda x:x[1],reverse=True)[:10][::-1]
     
 players = [i[0] for i in top10]
 percentages = [i[1] for i in top10]
@@ -80,8 +101,8 @@ ind = np.arange(len(percentages)) # the x locations for the groups
 ax.barh(ind, percentages, width, color="dodgerblue")
 ax.set_yticks((ind+width/2)-.5)
 ax.set_yticklabels(players, minor=False)
-plt.xlabel('Career EM',fontsize=15)
-plt.ylabel('Player',fontsize=15)       
+plt.xlabel('Career EM',fontsize=20)
+plt.ylabel('Player',fontsize=20)       
 for i, v in enumerate(percentages):
     ax.text(v-.0075, i-.20, str(round(v,3)), color='white', fontweight='bold')
 ax.set_aspect(aspect=0.005)
@@ -93,7 +114,7 @@ plt.show()
 #now we want to repeat the above plot for the bottom 10 career EM factors
 
 bottom10=sorted([(id_to_name[k],round(v[-1],3)) for k,v in player_serve_info.items() \
-              if num_matches[k]>min_matches],key=lambda x:x[1],reverse=True)[-10:][::-1]
+              if (num_matches[k]>min_matches) and (k in top_player_list)],key=lambda x:x[1],reverse=True)[-10:][::-1]
     
 players = [i[0] for i in bottom10]
 percentages = [i[1] for i in bottom10]
@@ -103,8 +124,8 @@ ind = np.arange(len(percentages)) # the x locations for the groups
 ax.barh(ind, percentages, width, color="red")
 ax.set_yticks((ind+width/2)-.5)
 ax.set_yticklabels(players, minor=False)
-plt.xlabel('Career EM',fontsize=15)
-plt.ylabel('Player',fontsize=15)       
+plt.xlabel('Career EM',fontsize=20)
+plt.ylabel('Player',fontsize=20)       
 for i, v in enumerate(percentages):
     ax.text(v+.005, i-.20, str(round(v,3)), color='white', fontweight='bold')
 ax.set_aspect(aspect=0.008)
@@ -117,7 +138,7 @@ plt.show()
 #lets repeat our top 10 plot for active players
 
 top10_recent=sorted([(id_to_name[k],round(v[-1],3)) for k,v in player_serve_info.items() \
-              if (num_matches[k]>min_matches) & (k in active_player_list)],key=lambda x:x[1],reverse=True)[:10][::-1]
+              if (num_matches[k]>min_matches) & (k in active_player_list)& (k in top_player_list)],key=lambda x:x[1],reverse=True)[:10][::-1]
     
 players = [i[0] for i in top10_recent]
 percentages = [i[1] for i in top10_recent]
@@ -127,8 +148,8 @@ ind = np.arange(len(percentages)) # the x locations for the groups
 ax.barh(ind, percentages, width, color="dodgerblue")
 ax.set_yticks((ind+width/2)-.5)
 ax.set_yticklabels(players, minor=False)
-plt.xlabel('Active player career EM',fontsize=15)
-plt.ylabel('Player',fontsize=15)      
+plt.xlabel('Active player career EM',fontsize=20)
+plt.ylabel('Player',fontsize=20)      
 for i, v in enumerate(percentages):
     ax.text(v-.0075, i-.20, str(round(v,3)), color='white', fontweight='bold')
 ax.set_aspect(aspect=0.005)
@@ -140,7 +161,7 @@ plt.show()
 #let's repeat our bottom 10 plot for active players
 
 bottom10_recent=sorted([(id_to_name[k],round(v[-1],3)) for k,v in player_serve_info.items() \
-              if (num_matches[k]>min_matches) & (k in active_player_list)],key=lambda x:x[1],reverse=True)[-10:][::-1]
+              if (num_matches[k]>min_matches) & (k in active_player_list)& (k in top_player_list)],key=lambda x:x[1],reverse=True)[-10:][::-1]
     
 players = [i[0] for i in bottom10_recent]
 percentages = [i[1] for i in bottom10_recent]
@@ -150,8 +171,8 @@ ind = np.arange(len(percentages)) # the x locations for the groups
 ax.barh(ind, percentages, width, color="red")
 ax.set_yticks((ind+width/2)-.5)
 ax.set_yticklabels(players, minor=False)
-plt.xlabel('Active player career EM',fontsize=15)
-plt.ylabel('Player',fontsize=15)       
+plt.xlabel('Active player career EM',fontsize=20)
+plt.ylabel('Player',fontsize=20)       
 for i, v in enumerate(percentages):
     ax.text(v+.005, i-.20, str(round(v,3)), color='white', fontweight='bold')
 ax.set_aspect(aspect=0.007)
@@ -170,13 +191,15 @@ plt.xlim([min(FSP_list), max(SSP_list)])
 plt.hist(FSP_list, bins=50, alpha=0.5,color='c',label='First serve')
 plt.hist(SSP_list, bins=50, alpha=0.5,color='r',label='Second serve')
 plt.legend()
-plt.xlabel(r'Serve make percentages', fontsize=22)
-plt.ylabel('Count',fontsize=25)
+plt.xlabel(r'Serve make percentages', fontsize=20)
+plt.ylabel('Count',fontsize=20)
+
+
 #calculate the averages of each
 plt.axvline(x=np.mean(SSP_list), linewidth=5, color='r', linestyle='dashed')
 plt.axvline(x=np.mean(FSP_list), linewidth=5, color='r', linestyle='dashed')
-plt.text(np.mean(SSP_list)-.11,150,'Mean: ' + str(round(np.mean(SSP_list),2)),rotation=0,fontsize=22)
-plt.text(np.mean(FSP_list)-.11,140,'Mean: ' + str(round(np.mean(FSP_list),2)),rotation=0,fontsize=22)
+plt.text(np.mean(SSP_list)-.11,150,'Mean: ' + str(round(np.mean(SSP_list),2)),rotation=0,fontsize=20)
+plt.text(np.mean(FSP_list)-.09,170,'Mean: ' + str(round(np.mean(FSP_list),2)),rotation=0,fontsize=20)
 plt.tight_layout()
 plt.savefig("serve_make_percentages_hist.png")
 plt.show()
@@ -193,12 +216,12 @@ plt.xlim([min(FSWP_list)-.1, max(SSWP_list)+.1])
 plt.hist(FSWP_list, bins=50, alpha=0.5,color='c',label='First serve')
 plt.hist(SSWP_list, bins=50, alpha=0.5,color='r',label='Second serve')
 plt.legend()
-plt.xlabel(r'Serve win percentages', fontsize=22)
-plt.ylabel('Count',fontsize=22)
+plt.xlabel(r'Serve win percentages', fontsize=20)
+plt.ylabel('Count',fontsize=20)
 plt.axvline(x=np.mean(SSWP_list), linewidth=5, color='r', linestyle='dashed',label='Second Serve')
 plt.axvline(x=np.mean(FSWP_list), linewidth=5, color='r', linestyle='dashed',label='First Serve')
-plt.text(np.mean(SSWP_list)-.09,200,'Mean: ' + str(round(np.mean(SSWP_list),2)),rotation=0,fontsize=22)
-plt.text(np.mean(FSWP_list)-.09,200,'Mean: ' + str(round(np.mean(FSWP_list),2)),rotation=0,fontsize=22)
+plt.text(np.mean(SSWP_list)-.09,200,'Mean: ' + str(round(np.mean(SSWP_list),2)),rotation=0,fontsize=20)
+plt.text(np.mean(FSWP_list)-.09,200,'Mean: ' + str(round(np.mean(FSWP_list),2)),rotation=0,fontsize=20)
 plt.tight_layout()
 plt.savefig("serve_winning_percentages_hist.png")
 plt.show()
@@ -218,7 +241,7 @@ x=np.linspace(0,1,100)
 lines=plt.plot(FSWP_list,SSWP_list,'o',x,fit_fun(x),'r--')
 plt.setp(lines,linewidth=5.0)
 #extract correlation coefficient
-plt.text(.31,.75,r"Pearson's correlation coefficient: " + str(round(np.corrcoef(FSWP_list, SSWP_list)[0, 1],2)),fontsize=10)
+plt.text(.31,.77,r"Pearson's correlation coefficient: " + str(round(np.corrcoef(FSWP_list, SSWP_list)[0, 1],2)),fontsize=12)
 ax.set_aspect(.75)
 plt.tight_layout()
 plt.savefig("first_serve_second_serve_wp_correaltion.png")
@@ -252,6 +275,7 @@ matchup_df=df.copy().reset_index()
 matchup_df["Player 1 Name"]=matchup_df["Player 1 (P1)"].apply(lambda x: id_to_name[x])
 matchup_df["Player 2 Name"]=matchup_df["Player 2 (P2)"].apply(lambda x: id_to_name[x])
 matchup_df=matchup_df[matchup_df['Number of Matches']>minMatches]
+matchup_df=matchup_df[matchup_df['Player 1 (P1)'].apply(lambda x: x in top_player_list) & matchup_df['Player 2 (P2)'].apply(lambda x: x in top_player_list)]
 matchup_df=matchup_df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_values(by='P1 Global EM',ascending=False).reset_index()[['P1 Global EM','Player 1 Name','Player 2 Name']].iloc[:10]
 
 
@@ -265,9 +289,9 @@ ind = np.arange(len(matchup_EMs))  # the x locations for the groups
 ax.barh(ind, matchup_EMs, width, color="dodgerblue")
 ax.set_yticks(ind+width/2-.5)
 ax.set_yticklabels(matchup_string, minor=False)
-plt.title('Post 1991 matchups',fontsize=15)
-plt.xlabel('Matchup EM',fontsize=15)
-plt.ylabel('Player matchup',fontsize=15)      
+plt.title('Post 1991 matchups',fontsize=20)
+plt.xlabel('Matchup EM',fontsize=20)
+plt.ylabel('Player matchup',fontsize=20)      
 ax.set_aspect(aspect=0.004)
 for i, v in enumerate(matchup_EMs):
     ax.text(v-.0075, i-.25, str(round(v,3)), color='white', fontweight='bold')
@@ -283,6 +307,7 @@ matchup_df=df.copy().reset_index()
 matchup_df=matchup_df[matchup_df['Number of Matches']>minMatches]
 matchup_df["Player 1 Name"]=matchup_df["Player 1 (P1)"].apply(lambda x: id_to_name[x])
 matchup_df["Player 2 Name"]=matchup_df["Player 2 (P2)"].apply(lambda x: id_to_name[x])
+matchup_df=matchup_df[matchup_df['Player 1 (P1)'].apply(lambda x: x in top_player_list) & matchup_df['Player 2 (P2)'].apply(lambda x: x in top_player_list)]
 matchup_df=matchup_df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_values(by='P1 Global EM',ascending=False).reset_index()[['P1 Global EM','Player 1 Name','Player 2 Name']].iloc[-10:]
 
 matchup_string = list(map(bar_graph_header,matchup_df['Player 1 Name'],matchup_df['Player 2 Name']))[::-1]
@@ -295,9 +320,9 @@ ind = np.arange(len(matchup_EMs))  # the x locations for the groups
 ax.barh(ind, matchup_EMs, width, color="red")
 ax.set_yticks(ind+width/2-.5)
 ax.set_yticklabels(matchup_string, minor=False)
-plt.title('Post 1991 matchups',fontsize=15)
-plt.xlabel('Matchup EM',fontsize=15)
-plt.ylabel('Player matchup',fontsize=15)      
+plt.title('Post 1991 matchups',fontsize=20)
+plt.xlabel('Matchup EM',fontsize=20)
+plt.ylabel('Player matchup',fontsize=20)      
 ax.set_aspect(aspect=0.007)
 for i, v in enumerate(matchup_EMs):
     ax.text(v+.0075, i-.25, str(round(v,3)), color='white', fontweight='bold')
@@ -311,6 +336,7 @@ matchup_df=df.copy().reset_index()
 matchup_df=matchup_df[matchup_df['Number of Matches']>minMatches]
 matchup_df["Player 1 Name"]=matchup_df["Player 1 (P1)"].apply(lambda x: id_to_name[x])
 matchup_df["Player 2 Name"]=matchup_df["Player 2 (P2)"].apply(lambda x: id_to_name[x])
+matchup_df=matchup_df[matchup_df['Player 1 (P1)'].apply(lambda x: x in top_player_list) & matchup_df['Player 2 (P2)'].apply(lambda x: x in top_player_list)]
 matchup_df=matchup_df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_values(by='P1 Global EM',ascending=False).reset_index()[['P1 Global EM','Player 1 Name','Player 2 Name']]
 
 recent_matchup_df=matchup_df[matchup_df["Player 1 Name"].apply(lambda x: name_to_id[x] in active_player_list) & \
@@ -326,9 +352,9 @@ ind = np.arange(len(matchup_EMs))  # the x locations for the groups
 ax.barh(ind, matchup_EMs, width, color="dodgerblue")
 ax.set_yticks(ind+width/2-.5)
 ax.set_yticklabels(matchup_string, minor=False)
-plt.title('Active player matchups',fontsize=15)
-plt.xlabel('Matchup EM',fontsize=15)
-plt.ylabel('Player matchup',fontsize=15)      
+plt.title('Active player matchups',fontsize=20)
+plt.xlabel('Matchup EM',fontsize=20)
+plt.ylabel('Player matchup',fontsize=20)      
 ax.set_aspect(aspect=0.004)
 for i, v in enumerate(matchup_EMs):
     ax.text(v-.0075, i-.25, str(round(v,3)), color='white', fontweight='bold')
@@ -344,6 +370,7 @@ matchup_df=df.reset_index()
 matchup_df=matchup_df[matchup_df['Number of Matches']>minMatches]
 matchup_df["Player 1 Name"]=matchup_df["Player 1 (P1)"].apply(lambda x: id_to_name[x])
 matchup_df["Player 2 Name"]=matchup_df["Player 2 (P2)"].apply(lambda x: id_to_name[x])
+matchup_df=matchup_df[matchup_df['Player 1 (P1)'].apply(lambda x: x in top_player_list) & matchup_df['Player 2 (P2)'].apply(lambda x: x in top_player_list)]
 matchup_df=matchup_df.set_index(['Player 1 (P1)','Player 2 (P2)']).sort_values(by='P1 Global EM',ascending=False).reset_index()[['P1 Global EM','Player 1 Name','Player 2 Name']]
 recent_matchup_df=matchup_df[matchup_df["Player 1 Name"].apply(lambda x: name_to_id[x] in active_player_list) & \
                  matchup_df["Player 2 Name"].apply(lambda x: name_to_id[x] in active_player_list)][-10:]
@@ -357,9 +384,9 @@ ind = np.arange(len(matchup_EMs))  # the x locations for the groups
 ax.barh(ind, matchup_EMs, width, color="red")
 ax.set_yticks(ind+width/2-.5)
 ax.set_yticklabels(matchup_string, minor=False)
-plt.title('Active player matchups',fontsize=15)
-plt.xlabel('Matchup EM',fontsize=15)
-plt.ylabel('Player matchup',fontsize=15)      
+plt.title('Active player matchups',fontsize=20)
+plt.xlabel('Matchup EM',fontsize=20)
+plt.ylabel('Player matchup',fontsize=20)      
 ax.set_aspect(aspect=0.007)
 for i, v in enumerate(matchup_EMs):
     ax.text(v+.0075, i-.25, str(round(v,3)), color='white', fontweight='bold')
@@ -391,18 +418,31 @@ width = 3 # the width of the bars
 ind = np.arange(len(EMs))  # the x locations for the groups
 ax.barh(5*ind, EMs, width, color=colors)
 ax.set_yticks(5*ind+width/2-.5)
-ax.set_yticklabels(opp_names, minor=False,fontsize=10)
-plt.title('Goran Ivanisevic EM vs. Opponent',fontsize=10)
-plt.xlabel('EM Factor',fontsize=10)
-plt.ylabel('Opponent',fontsize=10)      
+ax.set_yticklabels(opp_names, minor=False,fontsize=6)
+plt.title('Goran Ivanisevic EM vs. Opponent',fontsize=8)
+plt.xlabel('EM Factor',fontsize=8)
+plt.ylabel('Opponent',fontsize=8)      
 ax.set_aspect(aspect=0.001)
 for i, v in enumerate(EMs):
     if v>=0:
-        spacing=-.007
+        spacing=-.009
     else:
         spacing=.001
-    if not (i==5 or i==6):
+    if not (i==5 or i==6 or i==7):
         ax.text(v+spacing, 5*ind[i]-.5, str(abs(round(v,3))), color='white', fontsize=4,fontweight='bold')
 plt.savefig(os.path.join('Goran_Ivanisevic_matchup_EM.png'), dpi=300, format='png', bbox_inches='tight') # use format='svg' or 'pdf' for vectorial pictures
 plt.show()
 
+
+#%%
+
+plt.figure()
+plt.clf()
+plt.hist(df.loc[name_to_id['Fernando Verdasco'],name_to_id['Rafael Nadal']].iloc[2])
+
+#%%
+
+plt.figure()
+plt.clf()
+print(np.mean(df.copy().reset_index().set_index(['Player 1 (P1)']).loc[name_to_id['Fernando Verdasco']]['P1 Total EM Series'].sum())
+plt.hist(df.copy().reset_index().set_index(['Player 1 (P1)']).loc[name_to_id['Fernando Verdasco']]['P1 Total EM Series'].sum())
